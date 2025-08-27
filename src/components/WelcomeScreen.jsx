@@ -193,7 +193,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
                 overflow: 'hidden',
                 ...bounceIn(300 + index * 150)
               }}
-              styles={{ body: { padding: '20px 16px' } }}
+              styles={{ body: { padding: '25px 20px' } }}
             >
               <Space direction="vertical" size={12}>
                 {feature.icon}
@@ -231,8 +231,8 @@ const WelcomeScreen = ({ onSendMessage }) => {
                 style={{
                   width: '100%',
                   height: 'auto',
-                  minHeight: '80px',
-                  padding: '10px 6px',
+                  minHeight: '100px',
+                  padding: '15px 10px',
                   borderRadius: '12px',
                   border: `2px solid ${action.color}20`,
                   backgroundColor: `${action.color}08`,
@@ -254,7 +254,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   e.target.style.backgroundColor = `${action.color}08`;
                 }}
               >
-                <div className="icon-container" style={{ fontSize: '16px', color: action.color, marginBottom: '3px' }}>
+                <div className="icon-container" style={{ fontSize: '20px', color: action.color, marginBottom: '6px' }}>
                   {action.icon}
                 </div>
                 <div style={{ textAlign: 'center', flex: 1 }}>
@@ -302,8 +302,8 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   style={{
                     width: '100%',
                     height: 'auto',
-                    minHeight: '80px',
-                    padding: '10px 6px',
+                    minHeight: '100px',
+                    padding: '15px 10px',
                     borderRadius: '12px',
                     border: `2px solid ${action.color}20`,
                     backgroundColor: `${action.color}08`,
@@ -326,9 +326,9 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   }}
                 >
                   <div className="icon-container" style={{
-                    fontSize: '24px',
+                    fontSize: '28px',
                     color: action.color,
-                    marginBottom: '4px'
+                    marginBottom: '6px'
                   }}>
                     {action.icon}
                   </div>

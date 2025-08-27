@@ -476,37 +476,49 @@ textarea::placeholder {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Icon Animation Classes - Chuyển động rõ ràng */
-.icon-pulse-gentle {
+/* Icon Animation Classes - Chỉ hoạt động ở dark mode */
+[data-theme="dark"] .icon-pulse-gentle {
   animation: iconPulseGentle 1.8s ease-in-out infinite;
 }
 
-.icon-pulse-medium {
+[data-theme="dark"] .icon-pulse-medium {
   animation: iconPulseMedium 2s ease-in-out infinite;
 }
 
-.icon-pulse-subtle {
+[data-theme="dark"] .icon-pulse-subtle {
   animation: iconPulseSubtle 1.5s ease-in-out infinite;
 }
 
-.icon-breathe-soft {
+[data-theme="dark"] .icon-breathe-soft {
   animation: iconBreatheSoft 2.2s ease-in-out infinite;
 }
 
-.icon-glow-soft {
+[data-theme="dark"] .icon-glow-soft {
   animation: iconGlowSoft 1.8s ease-in-out infinite;
 }
 
-.icon-heartbeat-soft {
+[data-theme="dark"] .icon-heartbeat-soft {
   animation: iconHeartbeatSoft 1.6s ease-in-out infinite;
 }
 
-.icon-pulse-glow {
+[data-theme="dark"] .icon-pulse-glow {
   animation: iconPulseGlow 2.1s ease-in-out infinite;
 }
 
-.icon-zoom-soft {
+[data-theme="dark"] .icon-zoom-soft {
   animation: iconZoomSoft 2.5s ease-in-out infinite;
+}
+
+/* Light mode - Tắt animation */
+.icon-pulse-gentle,
+.icon-pulse-medium,
+.icon-pulse-subtle,
+.icon-breathe-soft,
+.icon-glow-soft,
+.icon-heartbeat-soft,
+.icon-pulse-glow,
+.icon-zoom-soft {
+  animation: none;
 }
 
 /* Hover effects for icons */
@@ -514,7 +526,8 @@ textarea::placeholder {
   transition: all 0.3s ease;
   cursor: pointer;
   display: inline-block;
-  overflow: hidden !important;
+  overflow: visible !important;
+  margin: 4px;
 }
 
 .animated-icon:hover {
@@ -554,7 +567,7 @@ textarea::placeholder {
 /* Special button hover animations */
 .quick-action-button {
   position: relative;
-  overflow: hidden !important;
+  overflow: visible !important;
   transition: all 0.3s ease;
 }
 
@@ -601,7 +614,7 @@ textarea::placeholder {
 /* Feature card special effects */
 .feature-card {
   position: relative;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .feature-card::-webkit-scrollbar {
@@ -666,6 +679,12 @@ textarea::placeholder {
 .icon-container {
   position: relative;
   display: inline-block;
+  padding: 8px;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-container::before {

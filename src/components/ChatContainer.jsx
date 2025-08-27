@@ -396,7 +396,6 @@ const ChatContainer = ({
             fontSize: '16px',
             fontFamily: 'Poppins, Inter, sans-serif',
             letterSpacing: '0.3px',
-            animation: theme === 'dark' ? 'glow 3s ease-in-out infinite' : 'pulse 2.5s ease-in-out infinite'
           }}>
             {currentChat?.title || 'Trợ lý AI Thủ tục Hành chính'}
           </h4>
