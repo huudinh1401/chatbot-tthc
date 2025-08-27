@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/src/assets/nltech.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TTHC Assistant - Trợ lý AI hỗ trợ thủ tục hành chính Việt Nam" />
+    <meta name="keywords" content="thủ tục hành chính, TTHC, AI assistant, chatbot, Việt Nam" />
+    <meta name="author" content="TTHC Assistant" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TTHC Assistant - Trợ lý AI Thủ tục Hành chính" />
+    <meta property="og:description" content="Hỗ trợ tra cứu và tư vấn thủ tục hành chính Việt Nam với AI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://apttthc.nguyenluan.vn" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TTHC Assistant" />
+    <meta name="twitter:description" content="Trợ lý AI hỗ trợ thủ tục hành chính Việt Nam" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1677ff" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://apttthc.nguyenluan.vn" />
+
+    <title>TTHC ASSISTANT NLTECH - Trợ lý AI Thủ tục Hành chính</title>
+
+    <style>
+      /* Loading screen styles */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+      }
+
+      .loading-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #1677ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 16px;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 0.8;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loading-text {
+        color: #6b7280;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 14px;
+      }
+
+      /* Hide loading screen when app is ready */
+      .app-ready .loading-screen {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+      <img src="/src/assets/nltech.png" alt="NLTECH Logo" class="loading-logo" />
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Đang khởi tạo TTHC ASSISTANT NLTECH...</div>
+    </div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // Hide loading screen when app is ready
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.body.classList.add('app-ready');
+          setTimeout(() => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+              loadingScreen.remove();
+            }
+          }, 300);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

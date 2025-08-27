@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Streaming Details Demo - Fixed V2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 85vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .demo-section {
+            padding: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f8fafc;
+        }
+        
+        .demo-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .demo-button {
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .demo-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .demo-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: #ffffff;
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .message.user .message-avatar {
+            background: #2563eb;
+        }
+        
+        .message.bot .message-avatar {
+            background: #10b981;
+        }
+        
+        .message-content {
+            max-width: 75%;
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .message.user .message-content {
+            background: #2563eb;
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+        
+        .message.bot .message-content {
+            background: #f8fafc;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 6px;
+        }
+        
+        .streaming {
+            border-left: 3px solid #10b981;
+            animation: streamGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes streamGlow {
+            0%, 100% { border-left-color: #10b981; }
+            50% { border-left-color: #34d399; }
+        }
+        
+        .status-bar {
+            padding: 1rem 2rem;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #6b7280;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .metadata {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        /* Markdown Styling */
+        .message-content h1, .message-content h2, .message-content h3 {
+            color: #1e40af !important;
+            margin: 0.5rem 0 0.25rem 0 !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+        }
+        
+        .message-content h1, .message-content h2 {
+            border-bottom: 1px solid #e2e8f0 !important;
+            padding-bottom: 0.25rem !important;
+        }
+        
+        .message-content strong {
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .message-content code {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
+        
+        .message-content a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .message-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .error {
+            background: #fef2f2 !important;
+            color: #dc2626 !important;
+            border: 1px solid #fecaca !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Auto-Streaming Details Demo (Fixed V2)</h1>
+            <p>Demo logic streaming chi tiết thủ tục hành chính real-time</p>
+        </div>
+        
+        <div class="demo-section">
+            <div class="demo-title">🎯 Test Auto-Streaming với các mã thủ tục:</div>
+            <div class="demo-buttons">
+                <button class="demo-button" data-procedure="1.001612">
+                    Mã 1.001612 - Đăng ký hộ kinh doanh
+                </button>
+                <button class="demo-button" data-procedure="2.002017">
+                    Mã 2.002017 - Cấp đổi giấy chứng nhận
+                </button>
+                <button class="demo-button" data-procedure="1.001266">
+                    Mã 1.001266 - Chấm dứt hộ kinh doanh
+                </button>
+                <button class="demo-button" id="clearBtn">
+                    🗑️ Xóa tin nhắn
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-area">
+            <div class="messages" id="messages">
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <h3>🎯 Demo Auto-Streaming Logic</h3>
+                        <p>Đây là demo để hiểu logic streaming chi tiết thủ tục:</p>
+                        
+                        <p><strong>🔄 Quy trình:</strong></p>
+                        <p>1. Click button → Gọi API <code>/api/v1/chat</code></p>
+                        <p>2. Nhận response với <code>auto_stream: true</code></p>
+                        <p>3. Tự động gọi <code>stream_endpoint</code></p>
+                        <p>4. Xử lý Server-Sent Events real-time</p>
+                        
+                        <p><strong>💡 Chọn một mã thủ tục ở trên để xem demo!</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot" style="display: none;"></div>
+                    <span id="status">Sẵn sàng demo</span>
+                </div>
+                <div id="streamingInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class StreamingDemo {
+            constructor() {
+                this.apiBase = 'http://localhost:7034/api/v1';
+                this.messagesContainer = document.getElementById('messages');
+                this.status = document.getElementById('status');
+                this.statusDot = document.getElementById('statusDot');
+                this.streamingInfo = document.getElementById('streamingInfo');
+                this.isStreaming = false;
+
+                this.bindEvents();
+
+                // Delay testConnection to avoid potential issues
+                setTimeout(() => {
+                    this.testConnection().catch(error => {
+                        console.error('Initial connection test failed:', error);
+                    });
+                }, 1000);
+            }
+
+            bindEvents() {
+                // Bind procedure test buttons
+                const procedureButtons = document.querySelectorAll('.demo-button[data-procedure]');
+                procedureButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const procedureCode = button.getAttribute('data-procedure');
+                        this.testProcedure(procedureCode).catch(error => {
+                            console.error('Test procedure error:', error);
+                            this.updateStatus('❌ Lỗi test procedure');
+                        });
+                    });
+                });
+
+                // Bind clear button
+                const clearBtn = document.getElementById('clearBtn');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.clearMessages();
+                    });
+                }
+            }
+            
+            async testConnection() {
+                try {
+                    const response = await fetch(`${this.apiBase}/health`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    const data = await response.json();
+                    this.updateStatus(`✅ API: ${data.status}`);
+                } catch (error) {
+                    console.error('API connection test failed:', error);
+                    this.updateStatus('❌ Không thể kết nối API');
+                }
+            }
+            
+            async testProcedure(procedureCode) {
+                try {
+                    if (this.isStreaming) {
+                        alert('Đang streaming, vui lòng đợi...');
+                        return;
+                    }
+
+                    // Hiển thị user message
+                    this.addMessage(`Chi tiết về mã hồ sơ ${procedureCode}`, 'user');
+
+                    // Disable buttons
+                    this.setButtonsState(false);
+
+                    try {
+                    this.updateStatus('🔄 Gọi API /chat...');
+                    
+                    // Bước 1: Gọi API chat
+                    const response = await fetch(`${this.apiBase}/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            message: `Chi tiết về mã hồ sơ ${procedureCode}`
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    this.updateStatus('📋 Phân tích response...');
+                    
+                    // Hiển thị thông tin response
+                    this.showResponseInfo(data);
+                    
+                    // Bước 2: Kiểm tra auto_stream
+                    if (data.intent_type === 'get_details' && data.auto_stream && data.stream_endpoint) {
+                        this.updateStatus('🚀 Bắt đầu auto-streaming...');
+                        
+                        // Tạo message cho streaming content
+                        const streamingMessageDiv = this.addMessage('', 'bot');
+                        
+                        // Bước 3: Gọi streaming endpoint
+                        await this.streamProcedureDetails(data.stream_endpoint, streamingMessageDiv);
+                    } else {
+                        this.updateStatus('❌ Không có auto-streaming');
+                        this.addMessage('Response không có auto_stream flag', 'bot', true);
+                    }
+                    
+                    } catch (error) {
+                        console.error('API call error:', error);
+                        this.updateStatus('❌ Lỗi API');
+                        this.addMessage(`Lỗi API: ${error.message}`, 'bot', true);
+                    } finally {
+                        this.setButtonsState(true);
+                    }
+
+                } catch (globalError) {
+                    console.error('Global testProcedure error:', globalError);
+                    this.updateStatus('❌ Lỗi hệ thống');
+                    this.addMessage(`Lỗi hệ thống: ${globalError.message}`, 'bot', true);
+                    this.setButtonsState(true);
+                }
+            }
+
+            showResponseInfo(data) {
+                const infoMessage = `
+**📋 Response từ API /chat:**
+
+**Intent Type:** \`${data.intent_type}\`
+**Auto Stream:** \`${data.auto_stream || false}\`
+**Procedure Code:** \`${data.procedure_code || 'N/A'}\`
+**Stream Endpoint:** \`${data.stream_endpoint || 'N/A'}\`
+
+${data.auto_stream ? '✅ **Sẽ tự động streaming chi tiết**' : '❌ **Không có auto-streaming**'}
+                `;
+
+                this.addMessage(infoMessage, 'bot');
+            }
+
+            async streamProcedureDetails(streamEndpoint, messageDiv) {
+                this.isStreaming = true;
+                messageDiv.classList.add('streaming');
+
+                this.updateStatus('📡 Kết nối streaming...');
+                this.showStreamingDot(true);
+
+                let response;
+                let startTime = Date.now();
+                let chunkCount = 0;
+                
+                try {
+                    // Gọi streaming endpoint
+                    const baseUrl = this.apiBase.replace('/api/v1', '');
+                    const streamUrl = `${baseUrl}${streamEndpoint}`;
+                    console.log('Streaming URL:', streamUrl);
+
+                    response = await fetch(streamUrl, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'text/event-stream',
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    // Xử lý Server-Sent Events
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+                    let buffer = '';
+
+                    this.updateStatus('📥 Đang nhận streaming data...');
+
+                    // Initialize accumulated content
+                    messageDiv.accumulatedContent = '';
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        buffer += decoder.decode(value, { stream: true });
+                        const lines = buffer.split('\n\n');
+                        buffer = lines.pop() || '';
+
+                        for (const line of lines) {
+                            if (line.trim()) {
+                                chunkCount++;
+                                this.updateStreamingInfo(chunkCount, Date.now() - startTime);
+
+                                try {
+                                    this.handleSSELine(line.trim(), messageDiv);
+                                } catch (sseError) {
+                                    console.error('SSE handling error:', sseError);
+                                }
+
+                                // Small delay for smooth rendering
+                                await new Promise(resolve => setTimeout(resolve, 0));
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Streaming error:', error);
+                    if (!messageDiv.innerHTML || messageDiv.innerHTML.trim() === '') {
+                        messageDiv.innerHTML = `<div class="error">❌ Lỗi kết nối streaming: ${error.message}</div>`;
+                    }
+                } finally {
+                    messageDiv.classList.remove('streaming');
+                    this.updateStatus('✅ Streaming hoàn thành');
+                    this.showStreamingDot(false);
+                    this.isStreaming = false;
+
+                    // Hiển thị metadata cuối
+                    const totalTime = ((Date.now() - startTime) / 1000).toFixed(2);
+                    this.streamingInfo.textContent = `📊 Hoàn thành: ${chunkCount} chunks trong ${totalTime}s`;
+                }
+            }
+
+            handleSSELine(line, messageDiv) {
+                console.log('Processing SSE line:', line);
+
+                const lines = line.split('\n');
+                let eventType = null;
+                let data = null;
+
+                for (const l of lines) {
+                    if (l.startsWith('event:')) {
+                        eventType = l.substring(6).trim();
+                    } else if (l.startsWith('data:')) {
+                        try {
+                            data = JSON.parse(l.substring(5).trim());
+                        } catch (error) {
+                            console.log('JSON parse error:', error);
+                            return;
+                        }
+                    }
+                }
+
+                if (!data) {
+                    console.log('No data found in SSE line');
+                    return;
+                }
+
+                console.log('SSE Event:', eventType, 'Data:', data);
+
+                switch (eventType) {
+                    case 'start':
+                    case 'StreamEventType.START':
+                        this.updateStatus('🚀 Bắt đầu streaming...');
+                        break;
+
+                    case 'chunk':
+                    case 'StreamEventType.CHUNK':
+                        if (data.delta !== undefined) {
+                            try {
+                                // Append new content
+                                messageDiv.accumulatedContent += data.delta;
+
+                                // Render immediately
+                                const renderedContent = this.renderMarkdown(messageDiv.accumulatedContent);
+                                messageDiv.innerHTML = renderedContent;
+
+                                // Scroll to bottom
+                                this.scrollToBottom();
+                            } catch (domError) {
+                                console.error('DOM update error:', domError);
+                                // Don't throw, just log and continue
+                            }
+                        }
+                        break;
+
+                    case 'metadata':
+                    case 'StreamEventType.METADATA':
+                        if (data.response_time !== undefined) {
+                            try {
+                                const metadata = document.createElement('div');
+                                metadata.className = 'metadata';
+                                metadata.innerHTML = `
+                                    ⏱️ ${data.response_time.toFixed(2)}s |
+                                    💾 Cache: ${data.cached ? 'Có' : 'Không'} |
+                                    📊 Sources: ${data.sources ? data.sources.length : 0}
+                                `;
+                                messageDiv.appendChild(metadata);
+                            } catch (metadataError) {
+                                console.error('Metadata DOM error:', metadataError);
+                                // Don't throw, just log and continue
+                            }
+                        }
+                        break;
+
+                    case 'end':
+                    case 'StreamEventType.END':
+                        this.updateStatus('✅ Streaming hoàn thành');
+                        break;
+
+                    case 'error':
+                    case 'StreamEventType.ERROR':
+                        this.updateStatus('❌ Lỗi streaming');
+                        messageDiv.innerHTML = `<div class="error">❌ ${data.error || 'Có lỗi xảy ra trong streaming'}</div>`;
+                        break;
+                }
+            }
+
+            renderMarkdown(text) {
+                if (!text) return '';
+                
+                // Convert line breaks to proper HTML
+                let html = text.replace(/\n/g, '<br>');
+
+                // Headers - tất cả đều dùng kích thước cố định 16px
+                html = html.replace(/^### (.*$)/gm, '<div style="color: #1e40af; margin: 0.5rem 0 0.25rem 0; font-size: 16px; font-weight: 600;">$1</div>');
+                html = html.replace(/^## (.*$)/gm, '<div style="color: #1e40af; margin: 0.5rem 0 0.25rem 0; font-size: 16px; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.25rem;">$1</div>');
+                html = html.replace(/^# (.*$)/gm, '<div style="color: #1e40af; margin: 0.5rem 0 0.25rem 0; font-size: 16px; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.25rem;">$1</div>');
+
+                // Bold and italic
+                html = html.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #1e40af; font-weight: 600;">$1</strong>');
+                html = html.replace(/\*(.*?)\*/g, '<em style="color: #475569;">$1</em>');
+
+                // Code blocks (backticks)
+                html = html.replace(/`([^`]+)`/g, '<code style="background: #dbeafe; color: #1e40af; padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-weight: 500;">$1</code>');
+
+                // Markdown links first: [text](url)
+                html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 500;">$1</a>');
+
+                return html;
+            }
+
+            addMessage(content, type, isError = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${type}`;
+
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = type === 'user' ? '👤' : '🤖';
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = `message-content ${isError ? 'error' : ''}`;
+
+                if (content) {
+                    if (type === 'bot') {
+                        contentDiv.innerHTML = this.renderMarkdown(content);
+                    } else {
+                        contentDiv.textContent = content;
+                    }
+                }
+
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(contentDiv);
+                this.messagesContainer.appendChild(messageDiv);
+                this.scrollToBottom();
+
+                return contentDiv;
+            }
+
+            updateStatus(message) {
+                this.status.textContent = message;
+            }
+
+            showStreamingDot(show) {
+                this.statusDot.style.display = show ? 'block' : 'none';
+            }
+
+            updateStreamingInfo(chunkCount, elapsedTime) {
+                const seconds = (elapsedTime / 1000).toFixed(1);
+                this.streamingInfo.textContent = `📊 ${chunkCount} chunks • ${seconds}s`;
+            }
+
+            setButtonsState(enabled) {
+                const buttons = document.querySelectorAll('.demo-button');
+                buttons.forEach(button => {
+                    button.disabled = !enabled;
+                });
+            }
+
+            clearMessages() {
+                // Keep only the first welcome message
+                const messages = this.messagesContainer.children;
+                while (messages.length > 1) {
+                    this.messagesContainer.removeChild(messages[messages.length - 1]);
+                }
+                this.updateStatus('🗑️ Đã xóa tin nhắn');
+                this.streamingInfo.textContent = '';
+            }
+
+            scrollToBottom() {
+                this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+            }
+        }
+
+        // Debug flag to track page lifecycle
+        console.log('🔄 Page loading/reloading at:', new Date().toISOString());
+
+        // Global error handlers to prevent page refresh
+        window.addEventListener('error', (e) => {
+            console.error('🚨 Global error:', e.error, 'at', e.filename, ':', e.lineno);
+            e.preventDefault(); // Prevent default browser error handling
+            return false;
+        });
+
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('🚨 Unhandled promise rejection:', e.reason);
+            e.preventDefault(); // Prevent default browser error handling
+            return false;
+        });
+
+        // Track page unload
+        window.addEventListener('beforeunload', (e) => {
+            console.log('🔄 Page unloading at:', new Date().toISOString());
+        });
+
+        // Global reference
+        let streamingDemo;
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                streamingDemo = new StreamingDemo();
+                console.log('StreamingDemo initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize StreamingDemo:', error);
+            }
+        });
+    </script>
+</body>
+</html>
