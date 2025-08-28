@@ -111,15 +111,20 @@ export const useChat = () => {
 
 // Custom hook for managing UI state
 export const useUI = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // Check if mobile on initial load
+  const isMobile = () => window.innerWidth <= 768;
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(isMobile());
   const [theme, setTheme] = useState('dark');
 
-  // Load UI preferences from localStorage
+  // Load UI preferences from localStorage and handle mobile
   useEffect(() => {
     const savedCollapsed = localStorage.getItem('tthc-sidebar-collapsed');
     const savedTheme = localStorage.getItem('tthc-theme');
 
-    if (savedCollapsed !== null) {
+    // On mobile, always start collapsed
+    if (isMobile()) {
+      setSidebarCollapsed(true);
+    } else if (savedCollapsed !== null) {
       setSidebarCollapsed(JSON.parse(savedCollapsed));
     }
 
@@ -139,6 +144,18 @@ export const useUI = () => {
   useEffect(() => {
     localStorage.setItem('tthc-theme', theme);
   }, [theme]);
+
+  // Handle window resize for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      if (isMobile()) {
+        setSidebarCollapsed(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(prev => !prev);

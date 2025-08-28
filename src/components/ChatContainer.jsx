@@ -340,8 +340,7 @@ const ChatContainer = ({
   };
 
   const headerStyle = {
-    padding: '12px 32px 12px 20px',
-    paddingRight: '0px', // Xóa padding bên phải
+    padding: '12px 20px',
     borderBottom: '1px solid var(--border-color)',
     backgroundColor: 'var(--bg-primary)',
     display: 'flex',
@@ -374,7 +373,7 @@ const ChatContainer = ({
   return (
     <div style={containerStyle}>
       {/* Header */}
-      <div style={headerStyle}>
+      <div className="chat-header" style={headerStyle}>
         <Space align="center">
           <Button
             type="text"
@@ -382,10 +381,10 @@ const ChatContainer = ({
             onClick={onToggleSidebar}
             style={{
               marginRight: '8px',
-              padding: '2px 6px',
+              padding: '4px 8px',
               borderRadius: '4px',
               color: theme === 'light' ? '#006600' : '#00FFFF',
-              fontSize: '14px',
+              fontSize: '16px',
               cursor: 'pointer'
             }}
           />
@@ -396,6 +395,10 @@ const ChatContainer = ({
             fontSize: '16px',
             fontFamily: 'Poppins, Inter, sans-serif',
             letterSpacing: '0.3px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            maxWidth: '200px'
           }}>
             {currentChat?.title || 'Trợ lý AI Thủ tục Hành chính'}
           </h4>

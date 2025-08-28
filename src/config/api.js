@@ -1,11 +1,18 @@
-// API Configuration
+import { ENV } from './env.js';
+
+// API Configuration from Environment Variables
 export const API_CONFIG = {
-  BASE_URL: 'https://apttthc.nguyenluan.vn',
-  API_KEY: 'GIyBK7ge2fLWK8G6hXDh47xbm5sKVCZd',
-  ENDPOINTS: {
-    CHAT: '/api/v1/chat',
-    HEALTH: '/api/v1/health',
-    PROCEDURES: '/api/v1/procedures'
+  BASE_URL: ENV.API_BASE_URL,
+  API_KEY: ENV.API_KEY,
+  ENDPOINTS: ENV.ENDPOINTS,
+  DEV_MODE: ENV.DEV_MODE,
+  LOG_LEVEL: ENV.LOG_LEVEL
+};
+
+// Conditional logging helper
+const log = (level, message, data = {}) => {
+  if (API_CONFIG.DEV_MODE && (API_CONFIG.LOG_LEVEL === 'debug' || level !== 'debug')) {
+    console[level](message, data);
   }
 };
 
@@ -19,7 +26,7 @@ export const getHeaders = () => ({
 export class ApiClient {
   static async post(endpoint, data) {
     try {
-      console.log('🚀 API POST Request:', {
+      log('log', '🚀 API POST Request:', {
         url: `${API_CONFIG.BASE_URL}${endpoint}`,
         endpoint,
         data,

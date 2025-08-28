@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import ChatContainer from './components/ChatContainer';
 import { useChat, useUI } from './hooks/useChat';
 import { ApiClient } from './config/api';
+import { validateEnv } from './config/env';
 
 function AppContent() {
   const { message } = AntdApp.useApp();
@@ -29,8 +30,14 @@ function AppContent() {
     toggleTheme
   } = useUI();
 
-  // Check API health on app start
+  // Validate environment and check API health on app start
   useEffect(() => {
+    // Validate environment configuration
+    if (!validateEnv()) {
+      message.error('Cấu hình môi trường không hợp lệ. Vui lòng kiểm tra file .env');
+      return;
+    }
+
     const checkApiHealth = async () => {
       try {
         await ApiClient.get('/api/v1/health');
@@ -58,6 +65,13 @@ function AppContent() {
   const handleGoHome = () => {
     // Về màn hình home - không chọn chat nào
     selectChat(null);
+  };
+
+  // Handle mobile overlay click
+  const handleOverlayClick = () => {
+    if (window.innerWidth <= 768 && !sidebarCollapsed) {
+      toggleSidebar();
+    }
   };
 
   const handleUpdateChat = (updatedChat) => {
@@ -96,6 +110,23 @@ function AppContent() {
         />
 
         <Content>
+          {/* Mobile overlay */}
+          {!sidebarCollapsed && (
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                zIndex: 999,
+                display: window.innerWidth <= 768 ? 'block' : 'none'
+              }}
+              onClick={handleOverlayClick}
+            />
+          )}
+
           <Routes>
             <Route
               path="/"

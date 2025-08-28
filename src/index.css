@@ -471,6 +471,46 @@ textarea::placeholder {
   color: var(--text-primary) !important;
 }
 
+/* Header Text Styling */
+.welcome-screen-container h1 {
+  /* Fallback for browsers that don't support gradient text */
+  color: var(--primary-color) !important;
+}
+
+/* Enhanced gradient text support */
+@supports (-webkit-background-clip: text) {
+  .welcome-screen-container h1 {
+    background: linear-gradient(135deg, #1677ff 0%, #52c41a 50%, #faad14 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+}
+
+/* Dark theme adjustments for gradient text */
+[data-theme="dark"] .welcome-screen-container h1 {
+  /* Brighter gradient for dark theme */
+  background: linear-gradient(135deg, #4096ff 0%, #73d13d 50%, #ffc53d 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Subtitle gradient text */
+.welcome-screen-container .ant-typography {
+  /* Fallback */
+  color: var(--text-primary) !important;
+}
+
+@supports (-webkit-background-clip: text) {
+  .welcome-screen-container .ant-typography {
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+}
+
 /* Animation Classes */
 .fade-in {
   animation: fadeIn 0.3s ease-in-out;
@@ -603,8 +643,10 @@ textarea::placeholder {
 }
 
 .quick-action-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border-color: currentColor !important;
+  filter: brightness(1.1) saturate(1.2);
 }
 
 .quick-action-button:hover .animated-icon {
@@ -615,6 +657,13 @@ textarea::placeholder {
 .feature-card {
   position: relative;
   overflow: visible !important;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+  filter: brightness(1.05) saturate(1.1);
 }
 
 .feature-card::-webkit-scrollbar {
@@ -679,9 +728,9 @@ textarea::placeholder {
 .icon-container {
   position: relative;
   display: inline-block;
-  padding: 8px;
-  min-width: 40px;
-  min-height: 40px;
+  padding: 4px;
+  min-width: 32px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1081,18 +1130,251 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   overflow-x: hidden !important;
 }
 
+/* Desktop chat input - better styling */
+@media (min-width: 769px) {
+  .chat-input-container {
+    padding: 20px 24px !important;
+    gap: 16px !important;
+  }
+
+  .chat-input-textarea {
+    height: 56px !important;
+    padding: 16px 20px !important;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    border-radius: 16px !important;
+  }
+
+  .chat-send-button {
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .chat-send-button span {
+    font-size: 16px !important;
+  }
+
+  .chat-send-button svg {
+    font-size: 18px !important;
+  }
+
+  /* Desktop avatar - clean and proper */
+  .chat-message .ant-avatar {
+    min-width: 36px !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #1677ff !important;
+    color: #ffffff !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Ensure proper spacing for avatar */
+  .chat-message .ant-space {
+    align-items: flex-start !important;
+  }
+
+  .chat-message .ant-space-item:first-child {
+    flex-shrink: 0 !important;
+    min-width: 36px !important;
+  }
+
+  .chat-message .ant-avatar .anticon {
+    font-size: 20px !important;
+    color: #ffffff !important;
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    line-height: 1 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .chat-message .ant-avatar .anticon svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Desktop loading and typing indicators */
+  .loading-message .ant-avatar,
+  .typing-indicator .ant-avatar {
+    min-width: 36px !important;
+    width: 36px !important;
+    height: 36px !important;
+    background-color: #1677ff !important;
+  }
+
+  .loading-message .ant-avatar .anticon,
+  .typing-indicator .ant-avatar .anticon {
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   :root {
-    font-size: 14px;
+    font-size: 12px;
   }
 
-  /* Mobile chat message adjustments - keep them large */
+  /* FORCE AVATAR VISIBILITY - HIGHEST PRIORITY */
+  .ant-avatar,
+  .ant-avatar.ant-avatar,
+  span.ant-avatar,
+  .chat-message .ant-avatar,
+  .loading-message .ant-avatar,
+  .typing-indicator .ant-avatar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #1677ff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    overflow: visible !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Clean avatar styling */
+  .chat-message .ant-avatar {
+    background-color: #1677ff !important;
+  }
+
+  /* FORCE ICON VISIBILITY */
+  .ant-avatar .anticon,
+  .ant-avatar .anticon.anticon,
+  .chat-message .ant-avatar .anticon,
+  .loading-message .ant-avatar .anticon,
+  .typing-indicator .ant-avatar .anticon {
+    font-size: 18px !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    line-height: 1 !important;
+  }
+
+  /* FORCE SVG VISIBILITY */
+  .ant-avatar .anticon svg,
+  .chat-message .ant-avatar .anticon svg,
+  .loading-message .ant-avatar .anticon svg,
+  .typing-indicator .ant-avatar .anticon svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* FORCE SPACE COMPONENT TO SHOW AVATAR */
+  .chat-message .ant-space,
+  .chat-message .ant-space-item {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .chat-message .ant-space-item:first-child {
+    flex-shrink: 0 !important;
+    min-width: 32px !important;
+    width: 32px !important;
+  }
+
+
+
+  /* Global text size reduction - exclude icons and avatars */
+  *:not(.anticon):not(.anticon *):not(.ant-avatar):not(.ant-avatar *) {
+    font-size: 13px !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+
+  p, div, span {
+    font-size: 13px !important;
+  }
+
+  /* Protect icons and avatars from global font-size */
+  .anticon {
+    font-size: 16px !important;
+  }
+
+  .ant-avatar {
+    font-size: 16px !important;
+  }
+
+  .ant-avatar .anticon {
+    font-size: 16px !important;
+  }
+
+  /* Force sidebar to be collapsed on mobile */
+  .ant-layout-sider {
+    position: fixed !important;
+    left: -280px !important;
+    z-index: 1000 !important;
+    height: 100vh !important;
+    transition: left 0.3s ease !important;
+  }
+
+  .ant-layout-sider:not(.ant-layout-sider-collapsed) {
+    left: 0 !important;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Content takes full width on mobile */
+  .ant-layout-content {
+    margin-left: 0 !important;
+    padding: 8px 12px !important;
+  }
+
+  /* Mobile header adjustments */
+  .chat-header {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    min-height: 40px !important;
+  }
+
+  .chat-header h4 {
+    font-size: 13px !important;
+    margin: 0 !important;
+  }
+
+  .chat-header .ant-btn {
+    font-size: 14px !important;
+    padding: 4px 6px !important;
+  }
+
+  /* Mobile chat message adjustments */
   .chat-message {
-    max-width: 90% !important;
+    max-width: 95% !important;
     word-wrap: break-word !important;
     overflow-wrap: break-word !important;
     text-align: left !important;
+    margin-bottom: 12px !important;
   }
 
   /* Better text wrapping on mobile */
@@ -1106,24 +1388,406 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     max-width: 100% !important;
   }
 
-  /* Mobile layout adjustments */
-  .ant-layout-content {
-    padding: 16px 20px !important;
+  /* Mobile welcome screen adjustments */
+  .welcome-screen-container {
+    padding: 12px 8px !important;
   }
 
-  /* Maintain larger gaps on mobile */
-  .chat-container {
-    gap: 12px !important;
+  .welcome-screen-container h1 {
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .welcome-screen-container p {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Reduce spacing between sections */
+  .ant-space {
+    gap: 8px !important;
+  }
+
+  .ant-space-item {
+    margin-bottom: 8px !important;
+  }
+
+  /* Mobile quick actions - 2 columns */
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* 2 khối cuối theo chiều dọc trên mobile */
+  .bottom-actions-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .quick-action-button {
+    min-height: 75px !important;
+    padding: 10px 8px !important;
+    font-size: 14px !important;
+  }
+
+  .quick-action-button div {
+    font-size: 14px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .quick-action-button div:last-child {
+    font-size: 12px !important; /* Description text */
+    line-height: 1.2 !important;
+  }
+
+  /* Mobile icon container adjustments */
+  .quick-action-button .icon-container {
+    padding: 2px !important;
+    margin-bottom: 2px !important;
+  }
+
+  /* Mobile features grid - 1 column */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .features-grid .ant-card {
+    padding: 12px !important;
+  }
+
+  .features-grid .ant-card .ant-typography {
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .features-grid .ant-card h4 {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Features spacing mobile */
+  .features-grid .ant-space {
+    gap: 2px !important;
+  }
+
+  .features-grid .ant-space-item {
+    margin-bottom: 2px !important;
+  }
+
+  /* Chat input mobile adjustments */
+  .chat-input-container {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+
+  .chat-input-textarea {
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+    line-height: 1.4 !important;
+    height: 50px !important;
+  }
+
+  .chat-input-textarea::placeholder {
+    font-size: 13px !important;
+  }
+
+  /* Chat input button - same height as textarea */
+  .chat-send-button {
+    font-size: 13px !important;
+    padding: 8px 16px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+  }
+
+  .chat-send-button span {
+    font-size: 12px !important;
+  }
+
+  .chat-send-button svg {
+    font-size: 14px !important;
+  }
+
+  /* Ẩn quick suggestions trên mobile */
+  .chat-input-container > div:last-child {
+    display: none !important;
   }
 }
 
 @media (max-width: 480px) {
-  /* Extra small screens - still keep them reasonably large */
-  .chat-message {
-    max-width: 92% !important;
+  /* Extra small screens */
+  .ant-layout-content {
+    padding: 6px 8px !important;
   }
 
-  .ant-layout-content {
-    padding: 12px 16px !important;
+  .chat-message {
+    max-width: 98% !important;
+    margin-bottom: 8px !important;
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+  }
+
+  .chat-message p {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+    line-height: 1.3 !important;
+  }
+
+  .chat-message div {
+    font-size: 13px !important;
+  }
+
+  /* Mobile avatar - clean styling */
+  .chat-message .ant-avatar {
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #1677ff !important;
+    border-radius: 50% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .chat-message .ant-avatar .anticon {
+    font-size: 18px !important;
+    line-height: 1 !important;
+    color: #ffffff !important;
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .chat-message .ant-avatar .anticon svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  /* Loading message and typing indicator avatars */
+  .loading-message .ant-avatar,
+  .typing-indicator .ant-avatar {
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #1677ff !important;
+  }
+
+  .loading-message .ant-avatar .anticon,
+  .typing-indicator .ant-avatar .anticon {
+    font-size: 18px !important;
+    line-height: 1 !important;
+    color: #ffffff !important;
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .loading-message .ant-avatar .anticon svg,
+  .typing-indicator .ant-avatar .anticon svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: currentColor !important;
+  }
+
+  /* Very small mobile - single column for quick actions */
+  .quick-actions-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 2 khối cuối vẫn theo chiều dọc */
+  .bottom-actions-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .quick-action-button {
+    min-height: 65px !important;
+    padding: 8px 6px !important;
+    font-size: 13px !important;
+  }
+
+  .quick-action-button div {
+    font-size: 13px !important;
+    margin-bottom: 1px !important;
+  }
+
+  .quick-action-button div:last-child {
+    font-size: 11px !important; /* Description text */
+    line-height: 1.1 !important;
+  }
+
+  /* Header adjustments for very small screens */
+  .chat-header h4 {
+    font-size: 13px !important;
+  }
+
+  .chat-header {
+    font-size: 12px !important;
+  }
+
+  .chat-input-container {
+    padding: 10px !important;
+  }
+
+  /* Ensure same height on very small screens */
+  .chat-input-textarea {
+    height: 46px !important;
+    padding: 10px 14px !important;
+  }
+
+  .chat-send-button {
+    height: 46px !important;
+    min-height: 46px !important;
+    font-size: 12px !important;
+    padding: 6px 14px !important;
+  }
+
+  .chat-send-button span {
+    font-size: 11px !important;
+  }
+
+  .chat-send-button svg {
+    font-size: 12px !important;
+  }
+
+  /* Sidebar icons on very small screens */
+  .ant-layout-sider .anticon {
+    font-size: 14px !important;
+    min-width: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .ant-layout-sider .ant-menu-item .anticon {
+    font-size: 13px !important;
+    min-width: 13px !important;
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  /* Chat message avatar on very small screens */
+  .chat-message .ant-avatar {
+    min-width: 28px !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #1677ff !important;
+  }
+
+  .chat-message .ant-avatar .anticon {
+    font-size: 16px !important;
+    color: #ffffff !important;
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .chat-message .ant-avatar .anticon svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: currentColor !important;
+  }
+}
+
+/* Tablet responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ant-layout-sider {
+    width: 240px !important;
+    max-width: 240px !important;
+    flex: 0 0 240px !important;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Touch improvements for mobile */
+@media (max-width: 768px) {
+  /* Larger touch targets */
+  .ant-btn {
+    min-height: 44px !important;
+    padding: 8px 16px !important;
+  }
+
+  .quick-action-button {
+    min-height: 60px !important;
+    touch-action: manipulation;
+  }
+
+  /* Prevent zoom on input focus (iOS) */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Smooth scrolling on mobile */
+  .messages-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Better tap highlights */
+  * {
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+  }
+
+  /* Sidebar overlay on mobile */
+  .ant-layout-sider:not(.ant-layout-sider-collapsed) {
+    background: var(--bg-secondary) !important;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Mobile menu button larger */
+  .chat-header .ant-btn {
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+
+  /* Sidebar mobile adjustments */
+  .ant-layout-sider .ant-menu {
+    font-size: 13px !important;
+  }
+
+  .ant-layout-sider .ant-menu-item {
+    padding: 8px 16px !important;
+    margin: 2px 0 !important;
+    height: auto !important;
+    min-height: 40px !important;
+  }
+
+  .ant-layout-sider .ant-typography {
+    font-size: 12px !important;
+  }
+
+  /* Sidebar icons - prevent shrinking */
+  .ant-layout-sider .anticon {
+    font-size: 16px !important;
+    min-width: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Chat history icons specifically */
+  .ant-layout-sider .ant-menu-item .anticon {
+    font-size: 14px !important;
+    min-width: 14px !important;
+    width: 14px !important;
+    height: 14px !important;
   }
 }

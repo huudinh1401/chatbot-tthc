@@ -43,7 +43,7 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
     position: 'sticky',
     bottom: 0,
     backgroundColor: 'var(--bg-primary)',
-    padding: '24px 40px', // Tăng padding để cân đối với messages
+    padding: '20px 24px',
     borderTop: '1px solid var(--border-color)',
     boxShadow: 'var(--shadow-md)',
     maxWidth: '100%',
@@ -99,7 +99,7 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
   };
 
   return (
-    <div style={inputStyle}>
+    <div className="chat-input-container" style={inputStyle}>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <TextArea
           ref={textAreaRef}
@@ -109,6 +109,7 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
           placeholder="Nhập câu hỏi về thủ tục hành chính..."
           disabled={isDisabled}
           style={textAreaStyle}
+          className="chat-input-textarea"
           autoSize={false}
           rows={1}
         />

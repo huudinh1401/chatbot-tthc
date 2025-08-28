@@ -137,7 +137,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
   });
 
   return (
-    <div style={{
+    <div className="welcome-screen-container" style={{
       maxWidth: '100%',
       width: '100%',
       margin: '0',
@@ -147,22 +147,35 @@ const WelcomeScreen = ({ onSendMessage }) => {
       position: 'relative'
     }}>
       {/* Header */}
-      <Space direction="vertical" size={16} style={{ width: '100%', padding: '0x 20px 0 20px' }}>
+      <Space direction="vertical" size={16} style={{ width: '100%', padding: '0 16px' }}>
         <div style={slideInLeft(0)}>
           <Title level={1} style={{
-            color: 'var(--text-primary)',
+            background: 'linear-gradient(135deg, #1677ff 0%, #52c41a 50%, #faad14 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
             marginBottom: '10px',
             fontSize: '1.8rem',
-            fontWeight: '600',
+            fontWeight: '700',
             lineHeight: '1.2',
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+            letterSpacing: '0.5px'
           }}>
             TTHC ASSISTANT NLTECH
           </Title>
           <Paragraph style={{
-            fontSize: '16px',
-            color: 'var(--text-secondary)',
+            fontSize: '18px',
+            color: 'var(--text-primary)',
             margin: '0 auto',
-            lineHeight: '1.5'
+            lineHeight: '1.5',
+            fontWeight: '500',
+            maxWidth: '800px',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textShadow: '0 1px 2px rgba(0,0,0,0.05)'
           }}>
             Trợ lý AI thông minh hỗ trợ tra cứu và tư vấn thủ tục hành chính Việt Nam.
             Hỏi tôi bất cứ điều gì về các thủ tục, quy trình và yêu cầu cụ thể.
@@ -170,7 +183,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
         </div>
 
         {/* Features */}
-        <div style={{
+        <div className="features-grid" style={{
           marginTop: '10px',
           padding: '0 20px',
           display: 'grid',
@@ -185,17 +198,18 @@ const WelcomeScreen = ({ onSendMessage }) => {
               className="feature-card"
               style={{
                 textAlign: 'center',
-                border: '1px solid var(--border-color)',
+                border: `2px solid ${feature.icon.props.style.color}30`,
                 borderRadius: '12px',
                 height: '100%',
-                backgroundColor: 'var(--bg-primary)',
+                background: `linear-gradient(135deg, ${feature.icon.props.style.color}08 0%, ${feature.icon.props.style.color}15 100%)`,
                 position: 'relative',
                 overflow: 'hidden',
+                boxShadow: `0 6px 20px ${feature.icon.props.style.color}20`,
                 ...bounceIn(300 + index * 150)
               }}
               styles={{ body: { padding: '25px 20px' } }}
             >
-              <Space direction="vertical" size={12}>
+              <Space direction="vertical" size={4}>
                 {feature.icon}
                 <Title level={4} style={{ margin: 0, color: 'var(--text-primary)' }}>
                   {feature.title}
@@ -215,7 +229,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
           </Title>
 
           {/* Hàng trên: 6 thủ tục đầu */}
-          <div style={{
+          <div className="quick-actions-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
             gap: '16px',
@@ -234,8 +248,9 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   minHeight: '100px',
                   padding: '15px 10px',
                   borderRadius: '12px',
-                  border: `2px solid ${action.color}20`,
-                  backgroundColor: `${action.color}08`,
+                  border: `2px solid ${action.color}40`,
+                  backgroundColor: `${action.color}15`,
+                  boxShadow: `0 4px 12px ${action.color}20`,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -254,7 +269,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   e.target.style.backgroundColor = `${action.color}08`;
                 }}
               >
-                <div className="icon-container" style={{ fontSize: '20px', color: action.color, marginBottom: '6px' }}>
+                <div className="icon-container" style={{ fontSize: '20px', color: action.color, marginBottom: '3px' }}>
                   {action.icon}
                 </div>
                 <div style={{ textAlign: 'center', flex: 1 }}>
@@ -285,7 +300,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
 
           {/* Hàng dưới: 2 thủ tục mới */}
           {quickActions.length > 6 && (
-            <div style={{
+            <div className="bottom-actions-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, minmax(150px, 1fr))',
               gap: '16px',
@@ -305,8 +320,9 @@ const WelcomeScreen = ({ onSendMessage }) => {
                     minHeight: '100px',
                     padding: '15px 10px',
                     borderRadius: '12px',
-                    border: `2px solid ${action.color}20`,
-                    backgroundColor: `${action.color}08`,
+                    border: `2px solid ${action.color}40`,
+                    backgroundColor: `${action.color}15`,
+                    boxShadow: `0 4px 12px ${action.color}20`,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -328,7 +344,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
                   <div className="icon-container" style={{
                     fontSize: '28px',
                     color: action.color,
-                    marginBottom: '6px'
+                    marginBottom: '3px'
                   }}>
                     {action.icon}
                   </div>

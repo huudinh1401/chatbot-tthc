@@ -39,21 +39,40 @@ cd chatbot-tthc
 npm install
 ```
 
-### Cấu hình API
+### Cấu hình Environment Variables
 
-API được cấu hình sẵn trong `src/config/api.js`:
-
-```javascript
-export const API_CONFIG = {
-  BASE_URL: 'https://apttthc.nguyenluan.vn',
-  API_KEY: 'GIyBK7ge2fLWK8G6hXDh47xbm5sKVCZd',
-  ENDPOINTS: {
-    CHAT: '/api/v1/chat',
-    HEALTH: '/api/v1/health',
-    PROCEDURES: '/api/v1/procedures'
-  }
-};
+Sao chép file `.env.example` thành `.env`:
+```bash
+cp .env.example .env
 ```
+
+Chỉnh sửa file `.env` với thông tin API của bạn:
+```env
+# API Configuration
+VITE_API_BASE_URL=https://apttthc.nguyenluan.vn
+VITE_API_KEY=GIyBK7ge2fLWK8G6hXDh47xbm5sKVCZd
+
+# API Endpoints
+VITE_API_CHAT_ENDPOINT=/api/v1/chat
+VITE_API_HEALTH_ENDPOINT=/api/v1/health
+VITE_API_PROCEDURES_ENDPOINT=/api/v1/procedures
+
+# Development Configuration
+VITE_DEV_MODE=true
+VITE_LOG_LEVEL=debug
+```
+
+### Environment Variables
+
+| Variable | Mô tả | Mặc định |
+|----------|-------|----------|
+| `VITE_API_BASE_URL` | URL gốc của API | `https://apttthc.nguyenluan.vn` |
+| `VITE_API_KEY` | API key để xác thực | - |
+| `VITE_API_CHAT_ENDPOINT` | Endpoint cho chat | `/api/v1/chat` |
+| `VITE_API_HEALTH_ENDPOINT` | Endpoint health check | `/api/v1/health` |
+| `VITE_API_PROCEDURES_ENDPOINT` | Endpoint thủ tục | `/api/v1/procedures` |
+| `VITE_DEV_MODE` | Bật chế độ development | `true` |
+| `VITE_LOG_LEVEL` | Mức độ log (info/debug) | `info` |
 
 ## 🏃‍♂️ Chạy ứng dụng
 
