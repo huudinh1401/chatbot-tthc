@@ -149,11 +149,8 @@ const WelcomeScreen = ({ onSendMessage }) => {
       {/* Header */}
       <Space direction="vertical" size={16} style={{ width: '100%', padding: '0 16px' }}>
         <div style={slideInLeft(0)}>
-          <Title level={1} style={{
-            background: 'linear-gradient(135deg, #1677ff 0%, #52c41a 50%, #faad14 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+          <Title level={1} className="welcome-title" style={{
+            textAlign: 'center',
             marginBottom: '10px',
             fontSize: '1.8rem',
             fontWeight: '700',
@@ -171,10 +168,7 @@ const WelcomeScreen = ({ onSendMessage }) => {
             fontWeight: '500',
             maxWidth: '800px',
             textAlign: 'center',
-            background: 'linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+
             textShadow: '0 1px 2px rgba(0,0,0,0.05)'
           }}>
             Trợ lý AI thông minh hỗ trợ tra cứu và tư vấn thủ tục hành chính Việt Nam.
