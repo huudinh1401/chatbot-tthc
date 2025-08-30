@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Typography, Space, Button, Alert } from 'antd';
+import { Space, Button, Alert } from 'antd';
 import { MenuOutlined, ReloadOutlined } from '@ant-design/icons';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
@@ -8,15 +8,17 @@ import LoadingMessage from './LoadingMessage';
 import WelcomeScreen from './WelcomeScreen';
 import { ApiClient } from '../config/api';
 import { generateChatTitle, handleApiError } from '../utils/helpers';
-const { Title } = Typography;
+
 
 const ChatContainer = ({
-  collapsed,
+  
   onToggleSidebar,
   currentChat,
   onUpdateChat,
   onNewChat,
-  theme
+  theme,
+  quickActionMessage,
+  onQuickActionConsumed
 }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,6 +50,13 @@ const ChatContainer = ({
       setMessages([]);
     }
   }, [currentChat]);
+
+  useEffect(() => {
+    if (quickActionMessage) {
+      handleSendMessage(quickActionMessage);
+      onQuickActionConsumed();
+    }
+  }, [quickActionMessage]);
 
   const handleSendMessage = async (messageText) => {
     if (!messageText.trim()) return;
@@ -432,8 +441,8 @@ const ChatContainer = ({
           />
         )}
 
-        {messages.length === 0 ? (
-          <WelcomeScreen onSendMessage={handleSendMessage} />
+        {!currentChat ? (
+          <WelcomeScreen />
         ) : (
           <>
             {messages.map((message) => (

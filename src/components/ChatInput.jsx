@@ -142,34 +142,7 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
         </div>
       </div>
       
-      {/* Quick suggestions */}
-      <div style={{ marginTop: '16px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-        {[
-          'Đăng ký doanh nghiệp',
-          'Cấp giấy phép kinh doanh',
-          'Thủ tục xin visa',
-          'Đăng ký kết hôn'
-        ].map((suggestion, index) => (
-          <Button
-            key={index}
-            size="small"
-            type="text"
-            onClick={() => setMessage(suggestion)}
-            disabled={loading}
-            style={{
-              fontSize: '13px',
-              color: 'var(--text-secondary)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '16px',
-              height: '32px',
-              backgroundColor: 'var(--bg-secondary)',
-              padding: '0 12px'
-            }}
-          >
-            {suggestion}
-          </Button>
-        ))}
-      </div>
+      
     </div>
   );
 };

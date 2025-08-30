@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+
 import { Layout, App as AntdApp } from 'antd';
 
 const { Content } = Layout;
@@ -11,15 +11,13 @@ import { validateEnv } from './config/env';
 
 function AppContent() {
   const { message } = AntdApp.useApp();
+  
+  const [quickActionMessage, setQuickActionMessage] = React.useState('');
 
   const {
-    chatHistory,
-    currentChatId,
     currentChat,
     createNewChat,
     updateChat,
-    selectChat,
-    deleteChat,
     clearAllChats
   } = useChat();
 
@@ -54,17 +52,20 @@ function AppContent() {
 
   // Không tự động tạo chat - chỉ tạo khi user hỏi câu đầu tiên
 
-  const handleNewChat = (title = null) => {
-    return createNewChat(title); // Return chat object với title để ChatContainer có thể sử dụng
-  };
-
-  const handleSelectChat = (chatId) => {
-    selectChat(chatId);
-  };
-
   const handleGoHome = () => {
-    // Về màn hình home - không chọn chat nào
-    selectChat(null);
+    clearAllChats();
+  };
+
+  const handleNewChat = (title = null) => {
+    return createNewChat(title);
+  };
+
+  const handleQuickAction = (message) => {
+    setQuickActionMessage(message);
+  };
+
+  const handleQuickActionConsumed = () => {
+    setQuickActionMessage('');
   };
 
   // Handle mobile overlay click
@@ -99,14 +100,12 @@ function AppContent() {
       >
         <Sidebar
           collapsed={sidebarCollapsed}
-          onNewChat={handleNewChat}
-          chatHistory={chatHistory}
-          onSelectChat={handleSelectChat}
-          currentChatId={currentChatId}
+
           theme={theme}
           onToggleTheme={toggleTheme}
-          onClearAllChats={clearAllChats}
+
           onGoHome={handleGoHome}
+          onQuickAction={handleQuickAction}
         />
 
         <Content>
@@ -127,35 +126,16 @@ function AppContent() {
             />
           )}
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ChatContainer
-                  collapsed={sidebarCollapsed}
-                  onToggleSidebar={toggleSidebar}
-                  currentChat={currentChat}
-                  onUpdateChat={handleUpdateChat}
-                  onNewChat={handleNewChat}
-                  theme={theme}
-                />
-              }
-            />
-            <Route
-              path="/chat/:chatId"
-              element={
-                <ChatContainer
-                  collapsed={sidebarCollapsed}
-                  onToggleSidebar={toggleSidebar}
-                  currentChat={currentChat}
-                  onUpdateChat={handleUpdateChat}
-                  onNewChat={handleNewChat}
-                  theme={theme}
-                />
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <ChatContainer
+            collapsed={sidebarCollapsed}
+            onToggleSidebar={toggleSidebar}
+            currentChat={currentChat}
+            onUpdateChat={handleUpdateChat}
+            onNewChat={handleNewChat}
+            theme={theme}
+            quickActionMessage={quickActionMessage}
+            onQuickActionConsumed={handleQuickActionConsumed}
+          />
         </Content>
       </Layout>
     </div>
