@@ -336,7 +336,7 @@ const ChatMessage = ({ message, onProcedureClick }) => {
   return (
     <div
       style={messageStyle}
-      className={`chat-message ${message.isStreamingMessage ? 'streaming-message' : ''}`}
+      className={`chat-message ${isUser ? 'user-message' : 'bot-message'} ${message.isStreamingMessage ? 'streaming-message' : ''}`}
     >
       <Card
         style={cardStyle}

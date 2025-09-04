@@ -420,6 +420,41 @@ body {
 
 /* Mobile Font Size Adjustments - Add 2px to all text */
 @media (max-width: 768px) {
+  /* Messages container - remove left padding on mobile */
+  .messages-container {
+    padding: 16px 8px 16px 0 !important;
+  }
+  
+  /* Chat bot messages - completely stick to left edge on mobile */
+  .chat-message.bot-message {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 8px !important;
+  }
+  
+  .chat-message.bot-message .ant-card {
+    margin-left: 0 !important;
+    border-radius: 0 16px 16px 8px !important;
+  }
+  
+  .chat-message.bot-message .ant-card .ant-card-body {
+    padding-left: 8px !important;
+  }
+  
+  .chat-message.bot-message .ant-space {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .chat-message.user-message {
+    margin-left: auto !important;
+    margin-right: 4px !important;
+    max-width: 85% !important;
+    padding-right: 4px !important;
+  }
+  
   /* General text elements */
   .ant-typography,
   .ant-typography p,
