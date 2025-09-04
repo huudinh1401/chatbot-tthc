@@ -144,31 +144,6 @@ const Sidebar = ({ collapsed, theme, onToggleTheme, onQuickAction, onGoHome }) =
             </div>
           </Space>
         </div>
-        <div style={{ padding: '16px' }}>
-          <div
-            onClick={onGoHome}
-            style={{
-              width: '100%',
-              height: '40px',
-              borderRadius: '8px',
-              background: '#006600',
-              border: '1px solid #006600',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              gap: '8px',
-              fontSize: '14px',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '600',
-              letterSpacing: '0.3px'
-            }}
-          >
-            <PlusOutlined style={{ color: 'white', fontSize: '14px' }} />
-            {!collapsed && 'Cuộc trò chuyện mới'}
-          </div>
-        </div>
 
         {/* Scrollable Middle Section */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px' }}>

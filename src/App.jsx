@@ -24,6 +24,7 @@ function AppContent() {
   const {
     sidebarCollapsed,
     theme,
+    isMobile,
     toggleSidebar,
     toggleTheme
   } = useUI();
@@ -70,7 +71,7 @@ function AppContent() {
 
   // Handle mobile overlay click
   const handleOverlayClick = () => {
-    if (window.innerWidth <= 768 && !sidebarCollapsed) {
+    if (isMobile && !sidebarCollapsed) {
       toggleSidebar();
     }
   };
@@ -110,7 +111,7 @@ function AppContent() {
 
         <Content>
           {/* Mobile overlay */}
-          {!sidebarCollapsed && (
+          {isMobile && !sidebarCollapsed && (
             <div
               style={{
                 position: 'fixed',
@@ -120,7 +121,7 @@ function AppContent() {
                 bottom: 0,
                 backgroundColor: 'rgba(0,0,0,0.5)',
                 zIndex: 999,
-                display: window.innerWidth <= 768 ? 'block' : 'none'
+                display: 'block'
               }}
               onClick={handleOverlayClick}
             />

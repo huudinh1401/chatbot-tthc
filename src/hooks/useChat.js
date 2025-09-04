@@ -43,6 +43,7 @@ export const useUI = () => {
   const isMobile = () => window.innerWidth <= 768;
   const [sidebarCollapsed, setSidebarCollapsed] = useState(isMobile());
   const [theme, setTheme] = useState('dark');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Load UI preferences from localStorage and handle mobile
   useEffect(() => {
@@ -76,7 +77,10 @@ export const useUI = () => {
   // Handle window resize for responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      if (isMobile()) {
+      const newWidth = window.innerWidth;
+      setWindowWidth(newWidth);
+      
+      if (newWidth <= 768) {
         setSidebarCollapsed(true);
       }
     };
@@ -96,6 +100,8 @@ export const useUI = () => {
   return {
     sidebarCollapsed,
     theme,
+    windowWidth,
+    isMobile: windowWidth <= 768,
     toggleSidebar,
     toggleTheme
   };

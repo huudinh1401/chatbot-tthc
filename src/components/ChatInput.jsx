@@ -7,6 +7,17 @@ const { TextArea } = Input;
 const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
   const [message, setMessage] = useState('');
   const textAreaRef = useRef(null);
+  
+  // Detect mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const isDisabled = disabled || loading || streaming;
 
@@ -47,40 +58,31 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
     borderTop: '1px solid var(--border-color)',
     boxShadow: 'var(--shadow-md)',
     maxWidth: '100%',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    zIndex: 100,
+    width: '100%',
+    left: 0,
+    right: 0
   };
 
   const textAreaStyle = {
-    height: '50px', // Cố định chiều cao bằng nút gửi
+    height: '50px',
     maxHeight: '140px',
     resize: 'none',
     borderRadius: '12px',
     border: '1px solid var(--border-color)',
     fontSize: '16px',
-    lineHeight: '1.4', // Giảm line-height
+    lineHeight: '1.4',
     backgroundColor: 'var(--bg-primary)',
     color: 'var(--text-primary)',
-    padding: '14px 16px', // Điều chỉnh padding để vừa 50px
+    padding: '14px 16px',
     flex: 1,
-    boxSizing: 'border-box', // Đảm bảo padding tính trong height
-    overflow: 'hidden', // Ẩn thanh cuộn
+    boxSizing: 'border-box',
     fontFamily: 'Inter, sans-serif',
     fontWeight: '400'
   };
 
-  // Tính toán màu nút dựa trên trạng thái
   const isButtonDisabled = isDisabled || !message.trim();
-
-  // Debug log
-  console.log('🎨 Button state:', {
-    isButtonDisabled,
-    loading,
-    streaming,
-    disabled,
-    hasMessage: !!message.trim(),
-    expectedBg: isButtonDisabled ? '#bfbfbf' : '#52c41a',
-    expectedText: '#ffffff'
-  });
 
   const buttonStyle = {
     height: '50px',
@@ -91,13 +93,77 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
     minWidth: '100px',
     flexShrink: 0,
     border: '1px solid',
-    // DISABLE = XÁM, BÌNH THƯỜNG = XANH LÁ
     backgroundColor: isButtonDisabled ? '#bfbfbf' : '#52c41a',
     borderColor: isButtonDisabled ? '#999999' : '#52c41a',
     color: isButtonDisabled ? '#ffffff' : '#ffffff',
     fontWeight: 'bold'
   };
 
+  // Mobile emergency input
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '0px',
+          left: '0px',
+          right: '0px',
+          width: '100vw',
+          height: '80px',
+          //backgroundColor: '#ffffff',
+          border: '1px solid var(--border-color)',
+          zIndex: 500,
+          display: 'flex',
+          alignItems: 'center',
+          padding: '10px',
+          gap: '10px',
+          boxSizing: 'border-box',
+          boxShadow: '0 -2px 8px rgba(0,0,0,0.1)'
+        }}
+      >
+        <input
+          type="text"
+          value={message}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          placeholder="Nhập câu hỏi về thủ tục hành chính..."
+          disabled={isDisabled}
+          style={{
+            flex: '1',
+            height: '50px',
+            padding: '12px 16px',
+            fontSize: '18px',
+            color: '#fff',
+            border: '1px solid var(--border-color)',
+            borderRadius: '8px',
+            outline: 'none',
+            fontFamily: 'Inter, sans-serif',
+            backgroundColor: 'var(--bg-primary)',
+          }}
+        />
+        <button
+          onClick={!isButtonDisabled ? handleSend : undefined}
+          disabled={isButtonDisabled}
+          style={{
+            height: '50px',
+            width: '80px',
+            backgroundColor: isButtonDisabled ? '#ccc' : '#52c41a',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+            fontFamily: 'Inter, sans-serif'
+          }}
+        >
+          Gửi
+        </button>
+      </div>
+    );
+  }
+
+  // Desktop input
   return (
     <div className="chat-input-container" style={inputStyle}>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -141,8 +207,6 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
           </span>
         </div>
       </div>
-      
-      
     </div>
   );
 };

@@ -341,11 +341,14 @@ const ChatContainer = ({
   };
 
   const containerStyle = {
-    height: '100vh',
+    height: '100dvh', // Dynamic viewport height for mobile
+    minHeight: '100dvh',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'var(--bg-primary)',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    width: '100%',
+    position: 'relative'
   };
 
   const headerStyle = {
@@ -374,7 +377,8 @@ const ChatContainer = ({
     scrollbarWidth: 'thin',
     scrollbarColor: 'var(--border-color) var(--bg-secondary)',
     minHeight: 0, // Important for flex scrolling
-    scrollBehavior: 'smooth'
+    scrollBehavior: 'smooth',
+    WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
   };
 
 
