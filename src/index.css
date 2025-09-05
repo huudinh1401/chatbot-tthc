@@ -2304,3 +2304,41 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     padding-bottom: 100px !important;
   }
 }
+
+/* Mobile Zoom Prevention - Added for preventing zoom when keyboard appears */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important;
+    transform-origin: left top;
+    -webkit-text-size-adjust: 100%;
+    -webkit-transform-origin: left top;
+  }
+  
+  body {
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+  
+  html {
+    -webkit-text-size-adjust: 100% !important;
+    -moz-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+  }
+  
+  /* Prevent zoom on input focus */
+  input:focus, textarea:focus, select:focus {
+    font-size: 16px !important;
+    zoom: 1;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Ensure mobile input maintains proper font size */
+  .chat-input-container input,
+  .chat-input-container textarea {
+    font-size: 16px !important;
+    min-height: 44px !important;
+  }
+}
