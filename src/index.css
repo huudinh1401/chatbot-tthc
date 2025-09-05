@@ -5,16 +5,20 @@
   0% {
     transform: rotateY(0deg);
   }
+
   100% {
     transform: rotateY(360deg);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.05);
@@ -22,18 +26,24 @@
 }
 
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
   }
+
   50% {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 255, 255, 0.4);
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -43,16 +53,20 @@
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 @keyframes breathe {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     filter: brightness(1);
   }
+
   50% {
     transform: scale(1.02);
     filter: brightness(1.1);
@@ -61,37 +75,49 @@
 
 /* Icon Animation Keyframes - Chuyển động rõ ràng hơn */
 @keyframes iconPulseGentle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.15);
   }
 }
 
 @keyframes iconPulseMedium {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }
 }
 
 @keyframes iconPulseSubtle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.12);
   }
 }
 
 @keyframes iconBreatheSoft {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.18);
     opacity: 0.85;
@@ -99,10 +125,13 @@
 }
 
 @keyframes iconGlowSoft {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     filter: brightness(1);
   }
+
   50% {
     transform: scale(1.14);
     filter: brightness(1.3);
@@ -110,28 +139,37 @@
 }
 
 @keyframes iconHeartbeatSoft {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   14% {
     transform: scale(1.15);
   }
+
   28% {
     transform: scale(1);
   }
+
   42% {
     transform: scale(1.15);
   }
+
   70% {
     transform: scale(1);
   }
 }
 
 @keyframes iconPulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 3px currentColor);
   }
+
   50% {
     transform: scale(1.16);
     filter: drop-shadow(0 0 12px currentColor);
@@ -139,15 +177,20 @@
 }
 
 @keyframes iconZoomSoft {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   25% {
     transform: scale(1.08);
   }
+
   50% {
     transform: scale(1.13);
   }
+
   75% {
     transform: scale(1.08);
   }
@@ -161,13 +204,15 @@
 }
 
 /* SIMPLE APPROACH */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   height: 100%;
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
+  height: 100dvh;
+  /* Dynamic viewport height for mobile */
 }
 
 #root {
@@ -175,7 +220,8 @@ html, body {
   padding: 0;
   height: 100%;
   height: 100vh;
-  height: 100dvh; /* Dynamic viewport height for mobile */
+  height: 100dvh;
+  /* Dynamic viewport height for mobile */
 }
 
 :root {
@@ -420,11 +466,12 @@ body {
 
 /* Mobile Font Size Adjustments - Add 2px to all text */
 @media (max-width: 768px) {
+
   /* Messages container - remove left padding on mobile */
   .messages-container {
     padding: 16px 8px 16px 0 !important;
   }
-  
+
   /* Chat bot messages - completely stick to left edge on mobile */
   .chat-message.bot-message {
     margin-left: 0 !important;
@@ -433,28 +480,28 @@ body {
     padding-left: 0 !important;
     padding-right: 8px !important;
   }
-  
+
   .chat-message.bot-message .ant-card {
     margin-left: 0 !important;
     border-radius: 0 16px 16px 8px !important;
   }
-  
+
   .chat-message.bot-message .ant-card .ant-card-body {
     padding-left: 8px !important;
   }
-  
+
   .chat-message.bot-message .ant-space {
     padding-left: 0 !important;
     margin-left: 0 !important;
   }
-  
+
   .chat-message.user-message {
     margin-left: auto !important;
     margin-right: 4px !important;
     max-width: 85% !important;
     padding-right: 4px !important;
   }
-  
+
   /* General text elements */
   .ant-typography,
   .ant-typography p,
@@ -463,59 +510,56 @@ body {
   div {
     font-size: calc(1em + 2px) !important;
   }
-  
+
   /* Chat message content */
   .chat-message p,
   .chat-message div,
   .chat-message span {
     font-size: calc(1em + 2px) !important;
   }
-  
+
   /* Sidebar items */
   .ant-layout-sider span,
   .ant-layout-sider div {
     font-size: calc(1em + 2px) !important;
   }
-  
+
   /* Button text */
   .ant-btn,
   .ant-btn span {
     font-size: calc(1em + 2px) !important;
   }
-  
+
   /* Welcome screen */
   .ant-typography-h1 {
     font-size: calc(1.8rem + 2px) !important;
   }
-  
+
   .ant-typography-paragraph {
     font-size: calc(18px + 2px) !important;
   }
-  
+
   /* Specific overrides for small text */
   [style*="font-size: 10px"] {
     font-size: 12px !important;
   }
-  
+
   [style*="font-size: 12px"] {
     font-size: 14px !important;
   }
-  
-  [style*="font-size: 13px"] {
-    font-size: 15px !important;
-  }
-  
-  [style*="font-size: 14px"] {
-    font-size: 16px !important;
-  }
-  
-  [style*="font-size: 16px"] {
-    font-size: 18px !important;
-  }
-  
-  [style*="font-size: 18px"] {
-    font-size: 20px !important;
-  }
+
+}
+
+[style*="font-size: 14px"] {
+  font-size: 16px !important;
+}
+
+[style*="font-size: 16px"] {
+  font-size: 18px !important;
+}
+
+[style*="font-size: 18px"] {
+  font-size: 20px !important;
 }
 
 .ant-input::placeholder {
@@ -589,7 +633,8 @@ textarea::placeholder {
 /* Enhanced gradient text support */
 @supports (-webkit-background-clip: text) {
   .welcome-screen-container h1 {
-    background: linear-gradient(135deg, #007CF0 0%, #00DFD8 100%) !important; /* Electric Blue to Cyan gradient */
+    background: linear-gradient(135deg, #007CF0 0%, #00DFD8 100%) !important;
+    /* Electric Blue to Cyan gradient */
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;
@@ -599,7 +644,8 @@ textarea::placeholder {
 /* Dark theme adjustments for gradient text */
 [data-theme="dark"] .welcome-screen-container h1 {
   /* Brighter gradient for dark theme */
-  background: linear-gradient(135deg, #FFFACD 0%, #FFD700 50%, #FFA500 100%) !important; /* Vibrant Pink to Red gradient for dark mode */
+  background: linear-gradient(135deg, #FFFACD 0%, #FFD700 50%, #FFA500 100%) !important;
+  /* Vibrant Pink to Red gradient for dark mode */
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -743,7 +789,7 @@ textarea::placeholder {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
@@ -753,7 +799,7 @@ textarea::placeholder {
 
 .quick-action-button:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   border-color: currentColor !important;
   filter: brightness(1.1) saturate(1.2);
 }
@@ -771,7 +817,7 @@ textarea::placeholder {
 
 .feature-card:hover {
   transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
   filter: brightness(1.05) saturate(1.1);
 }
 
@@ -798,7 +844,7 @@ textarea::placeholder {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -814,9 +860,11 @@ textarea::placeholder {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -824,11 +872,10 @@ textarea::placeholder {
 
 .animated-background {
   background: linear-gradient(-45deg,
-    var(--bg-primary),
-    var(--bg-secondary),
-    var(--bg-primary),
-    var(--bg-secondary)
-  );
+      var(--bg-primary),
+      var(--bg-secondary),
+      var(--bg-primary),
+      var(--bg-secondary));
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -865,14 +912,37 @@ textarea::placeholder {
 }
 
 /* Staggered animation delays for icons */
-.icon-delay-1 { animation-delay: 0.1s; }
-.icon-delay-2 { animation-delay: 0.2s; }
-.icon-delay-3 { animation-delay: 0.3s; }
-.icon-delay-4 { animation-delay: 0.4s; }
-.icon-delay-5 { animation-delay: 0.5s; }
-.icon-delay-6 { animation-delay: 0.6s; }
-.icon-delay-7 { animation-delay: 0.7s; }
-.icon-delay-8 { animation-delay: 0.8s; }
+.icon-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.icon-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.icon-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.icon-delay-4 {
+  animation-delay: 0.4s;
+}
+
+.icon-delay-5 {
+  animation-delay: 0.5s;
+}
+
+.icon-delay-6 {
+  animation-delay: 0.6s;
+}
+
+.icon-delay-7 {
+  animation-delay: 0.7s;
+}
+
+.icon-delay-8 {
+  animation-delay: 0.8s;
+}
 
 /* Ẩn hoàn toàn thanh cuộn cho tất cả element có animation */
 [class*="icon-"],
@@ -911,6 +981,7 @@ button::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -926,6 +997,7 @@ button::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -933,10 +1005,14 @@ button::-webkit-scrollbar {
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.4;
   }
+
   30% {
     transform: translateY(-10px);
     opacity: 1;
@@ -954,7 +1030,9 @@ button::-webkit-scrollbar {
 }
 
 /* Prevent horizontal overflow for all elements */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   max-width: 100% !important;
   overflow-x: hidden !important;
   box-sizing: border-box !important;
@@ -1024,8 +1102,13 @@ body {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Messages container scrolling */
@@ -1056,6 +1139,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1068,25 +1152,30 @@ body {
 
 /* Streaming glow animation */
 @keyframes streamGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     border-left-color: var(--primary-color);
   }
+
   50% {
     border-left-color: #40a9ff;
   }
 }
 
 /* Ensure messages don't overlap */
-.messages-container > * {
+.messages-container>* {
   flex-shrink: 0 !important;
 }
 
 /* Clickable links in chat messages */
 .chat-message a {
-  color: #059669 !important; /* Xanh lá đậm */
+  color: #059669 !important;
+  /* Xanh lá đậm */
   text-decoration: underline !important;
   font-weight: 600 !important;
-  font-size: 16px !important; /* Size lớn hơn */
+  font-size: 16px !important;
+  /* Size lớn hơn */
   cursor: pointer !important;
   word-break: break-all !important;
   transition: all 0.2s ease !important;
@@ -1094,28 +1183,33 @@ body {
 
 .chat-message a:hover {
   text-decoration: none !important;
-  background-color: #d1fae5 !important; /* Light green background */
-  color: #047857 !important; /* Darker green on hover */
+  background-color: #d1fae5 !important;
+  /* Light green background */
+  color: #047857 !important;
+  /* Darker green on hover */
   padding: 2px 6px !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2) !important; /* Green shadow */
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2) !important;
+  /* Green shadow */
 }
 
 .chat-message a:active {
   transform: scale(0.98) !important;
-  background-color: #a7f3d0 !important; /* Even lighter green when clicked */
+  background-color: #a7f3d0 !important;
+  /* Even lighter green when clicked */
 }
 
 /* External link icon */
 .chat-message a::after {
   content: " 🔗";
-  font-size: 14px; /* Icon lớn hơn một chút */
+  font-size: 14px;
+  /* Icon lớn hơn một chút */
   opacity: 0.8;
   margin-left: 3px;
 }
 
 /* Ensure content fills full width */
-.ant-layout-content > * {
+.ant-layout-content>* {
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
@@ -1126,7 +1220,9 @@ body {
 }
 
 /* Prevent any element from creating horizontal overflow */
-body, html, #root {
+body,
+html,
+#root {
   overflow-x: hidden !important;
   width: 100vw !important;
   max-width: 100vw !important;
@@ -1144,7 +1240,7 @@ body, html, #root {
 }
 
 /* Ensure no gaps around scrollable content */
-.ant-layout-content > div {
+.ant-layout-content>div {
   margin: 0 !important;
   padding-right: 0 !important;
   border-right: none !important;
@@ -1198,6 +1294,7 @@ body, html, #root {
 
 /* Responsive quick actions */
 @media (max-width: 576px) {
+
   /* Mobile: 2 columns */
   .ant-col-xs-12 {
     flex: 0 0 50% !important;
@@ -1206,6 +1303,7 @@ body, html, #root {
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
+
   /* Small tablet: 3 columns */
   .ant-col-sm-8 {
     flex: 0 0 33.333333% !important;
@@ -1214,6 +1312,7 @@ body, html, #root {
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
+
   /* Medium tablet: 4 columns */
   .ant-col-md-6 {
     flex: 0 0 25% !important;
@@ -1222,6 +1321,7 @@ body, html, #root {
 }
 
 @media (min-width: 993px) {
+
   /* Desktop: 6 columns */
   .ant-col-lg-4 {
     flex: 0 0 16.666667% !important;
@@ -1230,7 +1330,15 @@ body, html, #root {
 }
 
 /* Specific text wrapping improvements */
-p, div, span, h1, h2, h3, h4, h5, h6 {
+p,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
   word-break: break-word !important;
@@ -1337,6 +1445,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
 /* FORCE MOBILE CHAT INPUT VISIBILITY - HIGHEST PRIORITY */
 @media (max-width: 768px) {
+
   /* Force chat input container to be visible */
   .chat-input-container {
     position: fixed !important;
@@ -1352,7 +1461,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2) !important;
     margin: 0 !important;
     transform: none !important;
     height: auto !important;
@@ -1360,7 +1469,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Force container inner div */
-  .chat-input-container > div {
+  .chat-input-container>div {
     display: flex !important;
     width: 100% !important;
     gap: 12px !important;
@@ -1416,7 +1525,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     visibility: visible !important;
     opacity: 1 !important;
     transform: none !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
   }
 
   .chat-send-button:hover {
@@ -1426,7 +1535,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .chat-send-button span {
-    font-size: 13px !important;
+    font-size: 16px !important;
     font-weight: 600 !important;
     color: #ffffff !important;
   }
@@ -1439,6 +1548,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
 /* Additional mobile fixes */
 @media (max-width: 768px) {
+
   /* Ensure messages don't overlap with input */
   .messages-container {
     padding-bottom: 100px !important;
@@ -1464,15 +1574,19 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     display: block !important;
   }
 }
+
 @media (max-width: 768px) {
   :root {
     font-size: 12px;
   }
 
   /* Fix viewport height issues on mobile */
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100vh !important;
-    height: 100dvh !important; /* Dynamic viewport height */
+    height: 100dvh !important;
+    /* Dynamic viewport height */
     min-height: 100vh !important;
     min-height: 100dvh !important;
     overflow-x: hidden !important;
@@ -1559,20 +1673,20 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     width: 32px !important;
   }
 
-
-
-  /* Global text size reduction - exclude icons and avatars */
-  *:not(.anticon):not(.anticon *):not(.ant-avatar):not(.ant-avatar *) {
-    font-size: 13px !important;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: 14px !important;
     margin-bottom: 8px !important;
   }
 
-  p, div, span {
-    font-size: 13px !important;
+  p,
+  div,
+  span {
+    font-size: 16px !important;
   }
 
   /* Protect icons and avatars from global font-size */
@@ -1602,7 +1716,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
   .ant-layout-sider:not(.ant-layout-sider-collapsed) {
     transform: translateX(0) !important;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.15) !important;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15) !important;
   }
 
   /* Content takes full width on mobile */
@@ -1620,19 +1734,21 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Ensure chat container fills mobile screen */
-  .ant-layout-content > div {
+  .ant-layout-content>div {
     height: 100% !important;
     width: 100% !important;
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
-    padding-bottom: 80px !important; /* Space for fixed input */
+    padding-bottom: 80px !important;
+    /* Space for fixed input */
   }
 
   /* Messages container padding on mobile */
   .messages-container {
     padding-bottom: 20px !important;
-    margin-bottom: 80px !important; /* Space for fixed input */
+    margin-bottom: 80px !important;
+    /* Space for fixed input */
   }
 
   /* Mobile header adjustments */
@@ -1643,7 +1759,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .chat-header h4 {
-    font-size: 13px !important;
+    font-size: 16px !important;
     margin: 0 !important;
   }
 
@@ -1724,7 +1840,8 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .quick-action-button div:last-child {
-    font-size: 12px !important; /* Description text */
+    font-size: 12px !important;
+    /* Description text */
     line-height: 1.2 !important;
   }
 
@@ -1750,7 +1867,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .features-grid .ant-card h4 {
-    font-size: 13px !important;
+    font-size: 16px !important;
     margin-bottom: 4px !important;
   }
 
@@ -1776,7 +1893,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid var(--border-color) !important;
     padding: 12px !important;
     gap: 10px !important;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1) !important;
     margin: 0 !important;
     display: flex !important;
     visibility: visible !important;
@@ -1784,7 +1901,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Container cho input và button */
-  .chat-input-container > div {
+  .chat-input-container>div {
     display: flex !important;
     width: 100% !important;
     gap: 12px !important;
@@ -1809,13 +1926,13 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .chat-input-textarea::placeholder {
-    font-size: 13px !important;
+    font-size: 16px !important;
     color: var(--text-secondary) !important;
   }
 
   /* Chat input button - FORCED VISIBILITY */
   .chat-send-button {
-    font-size: 13px !important;
+    font-size: 16px !important;
     padding: 8px 16px !important;
     height: 50px !important;
     min-height: 50px !important;
@@ -1844,12 +1961,13 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Ẩn quick suggestions trên mobile */
-  .chat-input-container > div:last-child {
+  .chat-input-container>div:last-child {
     display: none !important;
   }
 }
 
 @media (max-width: 480px) {
+
   /* Extra small screens */
   .ant-layout-content {
     padding: 6px 8px !important;
@@ -1858,18 +1976,18 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   .chat-message {
     max-width: 98% !important;
     margin-bottom: 8px !important;
-    font-size: 13px !important;
+    font-size: 16px !important;
     padding: 8px 12px !important;
   }
 
   .chat-message p {
-    font-size: 13px !important;
+    font-size: 16px !important;
     margin-bottom: 4px !important;
     line-height: 1.3 !important;
   }
 
   .chat-message div {
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 
   /* Mobile avatar - clean styling */
@@ -1946,22 +2064,23 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   .quick-action-button {
     min-height: 65px !important;
     padding: 8px 6px !important;
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 
   .quick-action-button div {
-    font-size: 13px !important;
+    font-size: 16px !important;
     margin-bottom: 1px !important;
   }
 
   .quick-action-button div:last-child {
-    font-size: 11px !important; /* Description text */
+    font-size: 11px !important;
+    /* Description text */
     line-height: 1.1 !important;
   }
 
   /* Header adjustments for very small screens */
   .chat-header h4 {
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 
   .chat-header {
@@ -1981,10 +2100,10 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15) !important;
   }
 
-  .chat-input-container > div {
+  .chat-input-container>div {
     display: flex !important;
     width: 100% !important;
     gap: 8px !important;
@@ -2042,7 +2161,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   .ant-layout-sider .ant-menu-item .anticon {
-    font-size: 13px !important;
+    font-size: 16px !important;
     min-width: 13px !important;
     width: 13px !important;
     height: 13px !important;
@@ -2089,6 +2208,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
 /* Touch improvements for mobile */
 @media (max-width: 768px) {
+
   /* Larger touch targets */
   .ant-btn {
     min-height: 44px !important;
@@ -2101,7 +2221,9 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Prevent zoom on input focus (iOS) */
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     font-size: 16px !important;
   }
 
@@ -2113,7 +2235,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
   /* Better tap highlights */
   * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
   }
 
   /* Sidebar overlay on mobile */
@@ -2130,7 +2252,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
   /* Sidebar mobile adjustments */
   .ant-layout-sider .ant-menu {
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 
   .ant-layout-sider .ant-menu-item {
@@ -2165,6 +2287,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
 /* MOBILE CHAT INPUT FIX - Target Ant Design Components */
 @media screen and (max-width: 768px) {
+
   /* Container */
   .chat-input-container {
     position: fixed !important;
@@ -2179,7 +2302,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1) !important;
   }
 
   [data-theme="dark"] .chat-input-container {
@@ -2188,7 +2311,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Inner flex container */
-  .chat-input-container > div {
+  .chat-input-container>div {
     display: flex !important;
     width: 100% !important;
     gap: 12px !important;
@@ -2300,41 +2423,46 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   }
 
   /* Chat container full height minus input space */
-  .ant-layout-content > div {
+  .ant-layout-content>div {
     padding-bottom: 100px !important;
   }
 }
 
 /* Mobile Zoom Prevention - Added for preventing zoom when keyboard appears */
 @media screen and (max-width: 768px) {
-  input, textarea, select {
+
+  input,
+  textarea,
+  select {
     font-size: 16px !important;
     transform-origin: left top;
     -webkit-text-size-adjust: 100%;
     -webkit-transform-origin: left top;
   }
-  
+
   body {
     -webkit-text-size-adjust: 100% !important;
     -moz-text-size-adjust: 100% !important;
     -ms-text-size-adjust: 100% !important;
     text-size-adjust: 100% !important;
   }
-  
+
   html {
     -webkit-text-size-adjust: 100% !important;
     -moz-text-size-adjust: 100% !important;
     -ms-text-size-adjust: 100% !important;
     text-size-adjust: 100% !important;
   }
-  
+
   /* Prevent zoom on input focus */
-  input:focus, textarea:focus, select:focus {
+  input:focus,
+  textarea:focus,
+  select:focus {
     font-size: 16px !important;
     zoom: 1;
     -webkit-text-size-adjust: 100%;
   }
-  
+
   /* Ensure mobile input maintains proper font size */
   .chat-input-container input,
   .chat-input-container textarea {
@@ -2342,3 +2470,262 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     min-height: 44px !important;
   }
 }
+
+/* Mobile Font Size Standardization - Minimum 16px for all text */
+@media (max-width: 768px) {
+
+  /* Base font size for all elements */
+  * {
+    font-size: 16px !important;
+  }
+
+  /* Specific overrides for different text elements */
+  body,
+  html {
+    font-size: 16px !important;
+  }
+
+  /* Ant Design components */
+  .ant-typography,
+  .ant-typography p,
+  .ant-typography div,
+  .ant-typography span,
+  .ant-card-body,
+  .ant-card-body p,
+  .ant-card-body div,
+  .ant-card-body span,
+  .ant-btn,
+  .ant-btn span,
+  .ant-input,
+  .ant-menu-item,
+  .ant-space-item {
+    font-size: 16px !important;
+  }
+
+  /* Chat messages */
+  .chat-message,
+  .chat-message p,
+  .chat-message div,
+  .chat-message span,
+  .chat-message .ant-card-body,
+  .chat-message .ant-typography {
+    font-size: 16px !important;
+  }
+
+  /* Sidebar text */
+  .ant-layout-sider,
+  .ant-layout-sider span,
+  .ant-layout-sider div,
+  .ant-layout-sider p {
+    font-size: 16px !important;
+  }
+
+  /* Welcome screen */
+  .welcome-screen-container p,
+  .welcome-screen-container div,
+  .welcome-screen-container span {
+    font-size: 16px !important;
+  }
+
+  /* Headings - scale up from 16px base */
+  h1,
+  .ant-typography-h1 {
+    font-size: 24px !important;
+  }
+
+  h2,
+  .ant-typography-h2 {
+    font-size: 22px !important;
+  }
+
+  h3,
+  .ant-typography-h3 {
+    font-size: 20px !important;
+  }
+
+  h4,
+  .ant-typography-h4 {
+    font-size: 18px !important;
+  }
+
+  h5,
+  .ant-typography-h5,
+  h6,
+  .ant-typography-h6 {
+    font-size: 16px !important;
+  }
+
+  /* Input and form elements */
+  input,
+  textarea,
+  select,
+  .ant-input,
+  .ant-input-affix-wrapper,
+  .chat-input-textarea {
+    font-size: 16px !important;
+  }
+
+  /* Button text */
+  button,
+  .ant-btn {
+    font-size: 16px !important;
+  }
+
+  /* Override any inline styles or specific size classes */
+  [style*="font-size"],
+  .text-xs,
+  .text-sm,
+  .text-base,
+  .text-lg,
+  .text-xl,
+  small {
+    font-size: 16px !important;
+  }
+
+  /* Remove any font-size overrides that might be smaller */
+  .ant-typography-caption,
+  .ant-form-item-explain,
+  .ant-form-item-extra {
+    font-size: 16px !important;
+  }
+}
+
+/* Force minimum 16px font size on mobile - Ultimate override */
+@media (max-width: 768px) {
+
+  /* Catch any remaining small text */
+  *[style*="font-size: 8px"],
+  *[style*="font-size: 9px"],
+  *[style*="font-size: 10px"],
+  *[style*="font-size: 11px"],
+  *[style*="font-size: 12px"],
+  * *[style*="font-size: 14px"],
+  *[style*="font-size: 15px"] {
+    font-size: 16px !important;
+  }
+
+  /* Catch CSS classes that might set small fonts */
+  .text-xs,
+  .text-sm,
+  .small,
+  .caption,
+  .footnote {
+    font-size: 16px !important;
+  }
+}
+
+/* ULTIMATE MOBILE FONT SIZE ENFORCEMENT - 16px minimum */
+@media (max-width: 768px) {
+
+  /* Super specific selector to override everything */
+  *:not(.anticon):not(.anticon *):not(.ant-avatar):not(.ant-avatar *) {
+    font-size: 16px !important;
+  }
+
+  /* Even more specific overrides */
+  html *,
+  body *,
+  #root *,
+  .ant-layout *,
+  .ant-card *,
+  .chat-message *,
+  .ant-typography * {
+    font-size: 16px !important;
+  }
+
+  /* Nuclear option - catch everything */
+  * {
+    font-size: 16px !important;
+  }
+
+  /* Headings should be larger */
+  h1,
+  h1 *,
+  .ant-typography-h1,
+  .ant-typography-h1 * {
+    font-size: 24px !important;
+  }
+
+  h2,
+  h2 *,
+  .ant-typography-h2,
+  .ant-typography-h2 * {
+    font-size: 22px !important;
+  }
+
+  h3,
+  h3 *,
+  .ant-typography-h3,
+  .ant-typography-h3 * {
+    font-size: 20px !important;
+  }
+
+  h4,
+  h4 *,
+  .ant-typography-h4,
+  .ant-typography-h4 * {
+    font-size: 18px !important;
+  }
+
+  h5,
+  h5 *,
+  h6,
+  h6 *,
+  .ant-typography-h5,
+  .ant-typography-h5 *,
+  .ant-typography-h6,
+  .ant-typography-h6 * {
+    font-size: 16px !important;
+  }
+}
+
+/* FINAL OVERRIDE - Nothing can be smaller than 16px on mobile */
+@media (max-width: 768px) {
+
+  /* Use the highest specificity possible */
+  html body #root * {
+    font-size: 16px !important;
+  }
+
+  /* Override any existing inline styles */
+  *[style] {
+    font-size: 16px !important;
+  }
+
+  /* Override any class-based font sizes */
+  *[class*="text"],
+  *[class*="font"],
+  *[class*="size"] {
+    font-size: 16px !important;
+  }
+
+  /* Special handling for headings */
+  h1[class],
+  h1[style] {
+    font-size: 24px !important;
+  }
+
+  h2[class],
+  h2[style] {
+    font-size: 22px !important;
+  }
+
+  h3[class],
+  h3[style] {
+    font-size: 20px !important;
+  }
+
+  h4[class],
+  h4[style] {
+    font-size: 18px !important;
+  }
+
+  h5[class],
+  h5[style],
+  h6[class],
+  h6[style] {
+    font-size: 16px !important;
+  }
+}
+
+/* CSS syntax fixed */

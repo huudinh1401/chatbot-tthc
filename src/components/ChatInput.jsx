@@ -7,7 +7,7 @@ const { TextArea } = Input;
 const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
   const [message, setMessage] = useState('');
   const textAreaRef = useRef(null);
-  
+
   // Detect mobile
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -126,13 +126,13 @@ const ChatInput = ({ onSendMessage, loading, disabled, streaming }) => {
           value={message}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder="Nhập câu hỏi về thủ tục hành chính..."
+          placeholder="Nhập câu hỏi của bạn..."
           disabled={isDisabled}
           style={{
             flex: '1',
             height: '50px',
             padding: '12px 16px',
-            fontSize: '18px',
+            fontSize: '16px',
             color: '#fff',
             border: '1px solid var(--border-color)',
             borderRadius: '8px',
