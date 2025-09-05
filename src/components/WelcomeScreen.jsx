@@ -23,7 +23,6 @@ const WelcomeScreen = () => {
       height: '100%',
       textAlign: 'center',
       padding: '20px',
-      marginTop: '-100px'
     }}>
       <img
         src={nlTechLogo}
