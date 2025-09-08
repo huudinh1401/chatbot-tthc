@@ -12,9 +12,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -23,6 +25,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -57,33 +60,45 @@
 /* Ẩn thanh cuộn trong TextArea */
 .ant-input {
   overflow: hidden !important;
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* IE/Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE/Edge */
 }
 
 .ant-input::-webkit-scrollbar {
-  display: none !important; /* Chrome/Safari */
+  display: none !important;
+  /* Chrome/Safari */
 }
 
 /* Font chữ đẹp cho website */
-body, * {
+body,
+* {
   font-family: 'Inter', 'Poppins', 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 /* Font cho tiêu đề */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', 'Inter', sans-serif !important;
   font-weight: 600 !important;
 }
 
 /* Font cho nút */
-button, .ant-btn {
+button,
+.ant-btn {
   font-family: 'Inter', sans-serif !important;
   font-weight: 500 !important;
 }
 
 /* Font cho input */
-input, textarea, .ant-input {
+input,
+textarea,
+.ant-input {
   font-family: 'Inter', sans-serif !important;
 }
 

@@ -472,6 +472,38 @@ body {
     padding: 16px 8px 16px 0 !important;
   }
 
+  /* Chat message responsive adjustments */
+  .chat-message {
+    max-width: 95% !important;
+  }
+
+  /* Đảm bảo user message không vượt quá 85% */
+  .chat-message.user-message {
+    max-width: 85% !important;
+  }
+
+  .user-message {
+    max-width: 85% !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .bot-message {
+    max-width: 95% !important;
+    width: fit-content !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  /* Sidebar quick actions - ensure text wraps properly */
+  .ant-layout-sider .ant-space-item span {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.3 !important;
+  }
+
   /* Chat bot messages - completely stick to left edge on mobile */
   .chat-message.bot-message {
     margin-left: 0 !important;
@@ -497,8 +529,9 @@ body {
 
   .chat-message.user-message {
     margin-left: auto !important;
-    margin-right: 4px !important;
+    margin-right: 0 !important;
     max-width: 85% !important;
+    width: fit-content !important;
     padding-right: 4px !important;
   }
 
@@ -1133,6 +1166,24 @@ body {
   line-height: 1.6 !important;
 }
 
+/* Đảm bảo user message luôn căn phải và không vượt quá 85% */
+.chat-message.user-message {
+  max-width: 85% !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  align-self: flex-end !important;
+}
+
+/* Đảm bảo bot message căn trái */
+.chat-message.bot-message {
+  max-width: 95% !important;
+  width: fit-content !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  align-self: flex-start !important;
+}
+
 /* Fade in animation for streaming messages */
 @keyframes streamFadeIn {
   from {
@@ -1281,9 +1332,34 @@ html,
   word-wrap: break-word !important;
 }
 
-.ant-card {
+/* Chỉ áp dụng cho card không phải chat message */
+.ant-card:not(.chat-message .ant-card) {
   max-width: 100% !important;
   overflow-x: hidden !important;
+}
+
+/* Chat message cards sử dụng width của container */
+.chat-message .ant-card {
+  width: 100% !important;
+  max-width: none !important;
+  overflow-x: hidden !important;
+}
+
+/* Đảm bảo user message card không vượt quá giới hạn */
+.chat-message.user-message .ant-card {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+/* CSS với specificity cao nhất để đảm bảo user message không vượt quá 85% */
+.messages-container .chat-message.user-message {
+  max-width: 85% !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
 }
 
 .ant-btn {
@@ -1777,6 +1853,11 @@ h6 {
     margin-bottom: 12px !important;
   }
 
+  /* Đảm bảo user message không vượt quá 85% trên mobile */
+  .chat-message.user-message {
+    max-width: 85% !important;
+  }
+
   /* Better text wrapping on mobile */
   .chat-message p,
   .chat-message div,
@@ -1978,6 +2059,21 @@ h6 {
     margin-bottom: 8px !important;
     font-size: 16px !important;
     padding: 8px 12px !important;
+  }
+
+  /* Đảm bảo user message không vượt quá 85% trên màn hình nhỏ */
+  .chat-message.user-message {
+    max-width: 85% !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .chat-message.bot-message {
+    max-width: 95% !important;
+    width: fit-content !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
   }
 
   .chat-message p {

@@ -54,18 +54,20 @@ const ChatMessage = ({ message, onProcedureClick }) => {
       return part;
     });
   };
-  
+
   const messageStyle = {
     marginBottom: '20px',
-    maxWidth: '95%', // Tăng từ 85% lên 95% - RẤT TO!
+    maxWidth: isUser ? '85%' : '95%',
+    width: 'fit-content', // Cả user và bot đều fit-content
     alignSelf: isUser ? 'flex-end' : 'flex-start',
     animation: 'slideUp 0.3s ease-out',
     wordWrap: 'break-word',
     overflowWrap: 'break-word',
     wordBreak: 'break-word',
     hyphens: 'auto',
-    minWidth: '200px', // Đặt min-width để đảm bảo to
-    width: 'fit-content'
+    minWidth: isUser ? 'auto' : '300px', // User messages không cần min-width
+    marginLeft: isUser ? 'auto' : '0', // User messages căn phải
+    marginRight: isUser ? '0' : 'auto' // Bot messages căn trái
   };
 
   const cardStyle = {
@@ -74,7 +76,7 @@ const ChatMessage = ({ message, onProcedureClick }) => {
     border: isUser ? 'none' : '1px solid var(--border-color)',
     borderRadius: '16px',
     boxShadow: 'var(--shadow-md)',
-    maxWidth: '100%',
+    width: '100%', // Thay đổi từ maxWidth thành width để Card fit với container
     wordWrap: 'break-word',
     overflowWrap: 'break-word',
     wordBreak: 'break-word'
@@ -114,7 +116,7 @@ const ChatMessage = ({ message, onProcedureClick }) => {
                 style={{
                   textAlign: 'left',
                   height: 'auto',
-                  padding: '8px 12px',
+                  padding: '12px 16px',
                   backgroundColor: 'var(--bg-chat)',
                   border: '1px solid var(--border-color)',
                   borderRadius: '8px',
@@ -122,24 +124,33 @@ const ChatMessage = ({ message, onProcedureClick }) => {
                   width: '100%',
                   justifyContent: 'flex-start',
                   display: 'flex',
-                  alignItems: 'flex-start'
+                  alignItems: 'flex-start',
+                  whiteSpace: 'normal',
+                  minHeight: 'auto'
                 }}
               >
                 <div style={{ textAlign: 'left', width: '100%' }}>
                   <div style={{
                     fontWeight: '500',
-                    fontSize: '16px', // ← Size lớn hơn (14px → 16px)
-                    textAlign: 'left'
-                  }}>
-                    {procedure.ma_hoso}
-                  </div>
-                  <div style={{
-                    fontSize: '14px', // ← Size lớn hơn (12px → 14px)
-                    color: 'var(--text-secondary)',
-                    marginTop: '2px',
-                    textAlign: 'left'
+                    fontSize: '16px',
+                    textAlign: 'left',
+                    whiteSpace: 'normal',
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word',
+                    lineHeight: '1.4'
                   }}>
                     {procedure.ten_thutuc}
+                  </div>
+                  <div style={{
+                    fontSize: '14px',
+                    color: 'var(--text-secondary)',
+                    marginTop: '2px',
+                    textAlign: 'left',
+                    whiteSpace: 'normal',
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word'
+                  }}>
+                    Mã thủ tục: {procedure.ma_hoso}
                   </div>
                 </div>
               </Button>
@@ -315,10 +326,52 @@ const ChatMessage = ({ message, onProcedureClick }) => {
       );
     }
 
+    // Render tin nhắn với tên thủ tục có màu khác (không dùng markdown)
+    const renderMessageWithHighlight = () => {
+      if (message.procedureName) {
+        // Tách tin nhắn để highlight "Chi tiết về thủ tục:" và tên thủ tục
+        const prefixText = "Chi tiết về thủ tục: ";
+        const remainingText = message.message.replace(prefixText, "").replace(message.procedureName, "");
+
+        return (
+          <span style={{
+            margin: 0,
+            lineHeight: '1.5',
+            fontSize: '16px'
+          }}>
+            <span style={{
+              color: isUser ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.5)', // Màu xám mờ
+              fontWeight: '400'
+            }}>
+              {prefixText}
+            </span>
+            <span style={{
+              color: isUser ? '#ffffff' : 'var(--text-primary)', // Màu trắng cho user, màu chính cho bot
+              fontWeight: '600'
+            }}>
+              {message.procedureName}
+            </span>
+            {remainingText}
+          </span>
+        );
+      }
+
+      // Tin nhắn thường không có tên thủ tục
+      return (
+        <span style={{
+          margin: 0,
+          lineHeight: '1.5',
+          color: isUser ? '#ffffff' : 'var(--text-primary)',
+          fontSize: '16px'
+        }}>
+          {renderClickableLinks(message.message)}
+        </span>
+      );
+    };
+
     return (
-      <p style={{
+      <div style={{
         margin: 0,
-        whiteSpace: 'pre-wrap',
         wordWrap: 'break-word',
         overflowWrap: 'break-word',
         wordBreak: 'break-word',
@@ -326,10 +379,10 @@ const ChatMessage = ({ message, onProcedureClick }) => {
         minWidth: 0,
         hyphens: 'auto',
         lineHeight: '1.5',
-        fontSize: '16px' // ← Size chữ lớn hơn cho text thường
+        fontSize: '16px'
       }}>
-        {message.message}
-      </p>
+        {renderMessageWithHighlight()}
+      </div>
     );
   };
 

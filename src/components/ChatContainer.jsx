@@ -11,7 +11,7 @@ import { generateChatTitle, handleApiError } from '../utils/helpers';
 
 
 const ChatContainer = ({
-  
+
   onToggleSidebar,
   currentChat,
   onUpdateChat,
@@ -58,7 +58,7 @@ const ChatContainer = ({
     }
   }, [quickActionMessage]);
 
-  const handleSendMessage = async (messageText) => {
+  const handleSendMessage = async (messageText, options = {}) => {
     if (!messageText.trim()) return;
 
     console.log('💬 Sending message:', {
@@ -78,7 +78,8 @@ const ChatContainer = ({
       id: Date.now(),
       type: 'user',
       message: messageText,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      procedureName: options.procedureName // Thêm tên thủ tục nếu có
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -174,11 +175,11 @@ const ChatContainer = ({
       setMessages(prev => prev.map(msg =>
         msg.id === messageId
           ? {
-              ...msg,
-              message: '',
-              streaming: true,
-              accumulatedContent: '' // Initialize accumulated content
-            }
+            ...msg,
+            message: '',
+            streaming: true,
+            accumulatedContent: '' // Initialize accumulated content
+          }
           : msg
       ));
 
@@ -232,10 +233,10 @@ const ChatContainer = ({
       setMessages(prev => prev.map(msg =>
         msg.id === messageId
           ? {
-              ...msg,
-              message: `❌ Lỗi tải chi tiết: ${error.message}`,
-              streaming: false
-            }
+            ...msg,
+            message: `❌ Lỗi tải chi tiết: ${error.message}`,
+            streaming: false
+          }
           : msg
       ));
     }
@@ -317,10 +318,10 @@ const ChatContainer = ({
         setMessages(prev => prev.map(msg =>
           msg.id === messageId
             ? {
-                ...msg,
-                message: `❌ ${data.error || 'Có lỗi xảy ra trong streaming'}`,
-                streaming: false
-              }
+              ...msg,
+              message: `❌ ${data.error || 'Có lỗi xảy ra trong streaming'}`,
+              streaming: false
+            }
             : msg
         ));
         break;
@@ -332,8 +333,8 @@ const ChatContainer = ({
   };
 
   const handleProcedureClick = (procedure) => {
-    const message = `Chi tiết về mã ${procedure.ma_hoso}`;
-    handleSendMessage(message);
+    const message = `Chi tiết về thủ tục: ${procedure.ten_thutuc}`;
+    handleSendMessage(message, { procedureName: procedure.ten_thutuc });
   };
 
   const handleRetry = () => {
@@ -416,7 +417,7 @@ const ChatContainer = ({
             {currentChat?.title || 'Trợ lý AI Thủ tục Hành chính'}
           </h4>
         </Space>
-        
+
         <Space>
           {error && (
             <Button

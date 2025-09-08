@@ -164,15 +164,28 @@ const Sidebar = ({ collapsed, theme, onToggleTheme, onQuickAction, onGoHome }) =
                 borderRadius: '8px',
                 cursor: 'pointer',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 gap: '12px',
                 transition: 'background-color 0.2s ease',
+                minHeight: 'auto',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-chat)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
             >
               <span style={{ fontSize: '18px', color: 'var(--text-secondary)' }}>{action.icon}</span>
-              {!collapsed && <span style={{ color: 'var(--text-primary)', fontSize: '14px' }}>{action.title}</span>}
+              {!collapsed && (
+                <span style={{
+                  color: 'var(--text-primary)',
+                  fontSize: '14px',
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                  overflowWrap: 'break-word',
+                  lineHeight: '1.3',
+                  flex: 1
+                }}>
+                  {action.title}
+                </span>
+              )}
             </div>
           ))}
         </div>
